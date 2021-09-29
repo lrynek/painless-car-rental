@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <title>{% block title %}{{ companyName }}{% endblock %}</title>
+
+        <link rel="icon" data-lazyload-href="favicon.png"/>
+
+        {% block stylesheets %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+            <link href="main.css" rel="stylesheet">
+        {% endblock %}
+
+        {% block headScripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            {% include 'include/menu.html.twig' %}
+
+            <main class="container">
+                <div class="bg-light p-5 rounded">
+                    <h1>{{ companyName }}</h1>
+                    <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
+                    <a class="btn btn-lg btn-primary" href="/docs/5.1/components/navbar/" role="button">View navbar docs »</a>
+                </div>
+            </main>
+        {% endblock %}
+
+        {% block bodyScripts %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        {% endblock %}
+    </body>
+</html>
