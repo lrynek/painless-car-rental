@@ -9,11 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class DefaultController extends AbstractController
 {
-	/**
-	 * @Route("/")
-	 */
-	public function search(): Response
+	#[Route('/')]
+	public function list(): Response
 	{
-		return $this->render('base.html.twig', ['companyName' => 'Painless Car Rental']);
+		return $this->render('search/list.html.twig');
 	}
 }
