@@ -3,6 +3,27 @@ body {
     padding-top: 4.5rem;
 }
 
+.header .navbar {
+    background: #061936;
+}
+
+header .navbar-brand {
+    position: relative;
+    padding-left: 2.75rem;
+}
+
+header .navbar-brand:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: transparent url("favicon.png") 50% 50% no-repeat;
+    background-size: contain;
+    width: 2.2rem;
+    height: 2.2rem;
+    top: 2px;
+    left: 0;
+}
+
 .colors .card {
     height: 100%;
     max-height: 100%;

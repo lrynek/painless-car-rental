@@ -17,7 +17,7 @@ final class DefaultController extends AbstractController
 {
 	private const PARAM_PAGE = 'page';
 	private const PAGE_DEFAULT = 1;
-	private const RESULTS_PER_PAGE = 4;
+	private const RESULTS_PER_PAGE = 3;
 
 	#[Route('/{page}', requirements: ['page' => '\d+'])]
 	public function list(Request $request, CarRepositoryInterface $carRepository): Response
