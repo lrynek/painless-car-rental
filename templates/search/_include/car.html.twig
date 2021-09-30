@@ -3,11 +3,37 @@
         <div class="col-md-4">
             <img src="images/cars/{{ car.picture }}" class="img-fluid rounded-start" alt="{{ car.fullName }}">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 details">
+            <div class="card-header bg-transparent">
+                <h5 class="card-title">{{ car.fullName }} <small class="text-muted">{{ car.productionYear }}</small></h5>
+            </div>
             <div class="card-body">
-                <h5 class="card-title">{{ car.fullName }}</h5>
-                <p class="card-text">{{ car.productionYear }}</p>
-                <p class="card-text"><small class="text-muted">{{ car.colors }}</small></p>
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <ul>
+                            <li>An item</li>
+                            <li>A second item</li>
+                            <li>A third item</li>
+                            <li>A fourth item</li>
+                            <li>And a fifth one</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-7">
+                        <ul>
+                            <li>An item</li>
+                            <li>A second item</li>
+                            <li>A third item</li>
+                            <li>A fourth item</li>
+                            <li>And a fifth one</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent text-right colors">
+                Colors:
+                {% for color in car.colors %}
+                    <span class="badge rounded-pill {{ color }}">{{ color }}</span>
+                {% endfor %}
             </div>
         </div>
     </div>

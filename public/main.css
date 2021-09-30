@@ -2,3 +2,57 @@ body {
     min-height: 75rem;
     padding-top: 4.5rem;
 }
+
+.colors .card {
+    height: 100%;
+    max-height: 100%;
+}
+
+.details {
+    position: relative;
+}
+
+.card .card-title {
+    margin-bottom: 0;
+}
+
+.card .card-footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.colors .badge {
+    border: 1px solid lightgray;
+}
+
+.colors .black {
+    border: 1px solid silver;
+    background-color: black;
+}
+
+.colors .blue {
+    background-color: dodgerblue;
+}
+
+.colors .green {
+    background-color: forestgreen;
+}
+
+.colors .red {
+    background-color: indianred;
+}
+
+.colors .silver {
+    background-color: silver;
+}
+
+.colors .white {
+    color: black;
+    background-color: white;
+}
+
+.colors .yellow {
+    background-color: gold;
+}
