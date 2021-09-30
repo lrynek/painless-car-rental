@@ -3,18 +3,24 @@ declare(strict_types=1);
 
 namespace App\ValueObject;
 
+use App\Repository\Elasticsearch\ValueObject\Response;
 use App\Repository\Elasticsearch\ValueObject\Result;
-use App\Repository\Elasticsearch\ValueObject\Results;
 
-final class Cars implements \IteratorAggregate, \Countable
+final class Cars implements \IteratorAggregate, \Countable, PagesTotalAwareInterface
 {
+	private int $total;
 	private array $cars;
 
-	public static function fromResults(Results $results): self
+	public static function fromResponse(Response $response): self
 	{
-		return new self(...$results->map(static function (Result $result) {
+		$cars = $response->results()->map(static function (Result $result) {
 			return Car::fromResult($result);
-		}));
+		});
+
+		return new self(
+			$response->total(),
+			...$cars
+		);
 	}
 
 	public function getIterator(): \ArrayIterator
@@ -27,8 +33,14 @@ final class Cars implements \IteratorAggregate, \Countable
 		return count($this->cars);
 	}
 
-	private function __construct(Car ...$cars)
+	public function total(): int
 	{
+		return $this->total;
+	}
+
+	private function __construct(int $total, Car ...$cars)
+	{
+		$this->total = $total;
 		$this->cars = $cars;
 	}
 }

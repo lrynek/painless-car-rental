@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Repository\Elasticsearch\ValueObject;
 
-final class Response
+use App\ValueObject\SearchResponseInterface;
+
+final class Response implements SearchResponseInterface
 {
 	private int $total;
 	private float $maxScore;

@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Repository\Elasticsearch\ValueObject;
 
-final class Results implements \IteratorAggregate, \Countable
+use App\ValueObject\SearchResultsInterface;
+
+final class Results implements SearchResultsInterface
 {
 	private array $results;
 

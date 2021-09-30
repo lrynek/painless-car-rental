@@ -8,6 +8,7 @@ use App\Repository\Elasticsearch\ValueObject\Criteria\MatchAll;
 use App\Repository\Elasticsearch\ValueObject\Query;
 use App\Service\ElasticsearchClient;
 use App\ValueObject\Cars;
+use App\ValueObject\Pagination;
 use JetBrains\PhpStorm\Pure;
 
 final class ElasticsearchCarRepository implements CarRepositoryInterface
@@ -17,14 +18,14 @@ final class ElasticsearchCarRepository implements CarRepositoryInterface
 	}
 
 	#[Pure]
-	public function findAll(): Cars
+	public function find(Pagination $pagination): Cars
 	{
 		$query = new Query;
-		$query->setPagination(1, 1000);
+		$query->setPagination($pagination);
 		$query->appendMust(new MatchAll);
 
 		$response = $this->client->search($query);
 
-		return Cars::fromResults($response->results());
+		return Cars::fromResponse($response);
 	}
 }

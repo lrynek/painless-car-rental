@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    {% for car in cars %}
-        {% include 'search/_include/car.html.twig' with { 'car': car } only %}
-    {% endfor %}
+    <section class="list">
+        {% for car in cars %}
+            {% include 'search/_include/car.html.twig' with { 'car': car } only %}
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+    {% include 'search/_include/pagination.html.twig' with { 'pagesTotal': pagesTotal, 'pagination': pagination } only %}
 {% endblock %}

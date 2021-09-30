@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace App\Repository\Elasticsearch\ValueObject;
 
 use App\Repository\Elasticsearch\ValueObject\Criteria\Criterion;
+use App\Repository\Elasticsearch\ValueObject\Sorter\DefaultSorter;
+use App\Repository\Elasticsearch\ValueObject\Sorter\SorterInterface;
+use App\ValueObject\Pagination;
 
 final class Query
 {
@@ -37,6 +40,7 @@ final class Query
 
 	public function __construct(array $structure = [])
 	{
+		$this->setSorter(new DefaultSorter);
 		$this->structure = array_merge($this->structure, $structure);
 	}
 
@@ -54,10 +58,14 @@ final class Query
 		return $this;
 	}
 
-	public function setPagination(int $page, int $documentsPerPage): void
+	public function setPagination(Pagination $pagination): void
 	{
-		$this->structure['from'] = ($page - 1) * $documentsPerPage;
-		$this->structure['size'] = $documentsPerPage;
+		$page = $pagination->page()->value();
+		$size = $pagination->resultsPerPage()->value();
+		$from = $page * $size;
+
+		$this->structure['from'] = $from;
+		$this->structure['size'] = $size;
 	}
 
 	public function appendMust(Criterion $criterion): void
@@ -82,10 +90,12 @@ final class Query
 		}
 	}
 
-	public function setSort(array $sort): void
+	public function setSorter(SorterInterface $sorter): void
 	{
-		if (false === empty($sort)) {
-			$this->structure['sort'] = $sort;
+		$definition = $sorter->definition();
+
+		if (false === empty($definition)) {
+			$this->structure['sort'] = $definition;
 		}
 	}
 

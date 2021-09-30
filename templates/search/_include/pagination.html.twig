@@ -1,0 +1,27 @@
+<nav aria-label="pagination">
+    <ul class="pagination justify-content-center mb-0">
+        {% for page in 1..pagesTotal.value %}
+            {% set currentPage = pagination.page %}
+
+            {% if loop.first %}
+                <li class="page-item {{ pagesTotal.isPreviousPageDisabled(currentPage) ? 'disabled' : '' }}">
+                    <a class="page-link" href="/{{ not pagesTotal.isPreviousPageDisabled(currentPage) ? (currentPage.value-1) : '' }}">Previous</a>
+                </li>
+            {% endif %}
+
+            {% if currentPage.equals(page) %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="/{{ currentPage }}">{{ currentPage }}</a>
+                </li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="/{{ page }}">{{ page }}</a></li>
+            {% endif %}
+
+            {% if loop.last %}
+                <li class="page-item {{ pagesTotal.isNextPageDisabled(currentPage) ? 'disabled' : '' }}">
+                    <a class="page-link" href="/{{ not pagesTotal.isNextPageDisabled(currentPage) ? (currentPage.value+1) : '' }}">Next</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

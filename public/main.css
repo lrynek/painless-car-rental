@@ -10,6 +10,7 @@ body {
 
 .details {
     position: relative;
+    border-left: 1px solid rgba(0,0,0,.125);
 }
 
 .card .card-title {
@@ -42,6 +43,10 @@ body {
 
 .colors .red {
     background-color: indianred;
+}
+
+.colors .orange {
+    background-color: darkorange;
 }
 
 .colors .silver {
