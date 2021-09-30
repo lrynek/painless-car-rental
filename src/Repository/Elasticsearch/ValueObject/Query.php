@@ -62,7 +62,7 @@ final class Query
 	{
 		$page = $pagination->page()->value();
 		$size = $pagination->resultsPerPage()->value();
-		$from = $page * $size;
+		$from = ($page - 1) * $size;
 
 		$this->structure['from'] = $from;
 		$this->structure['size'] = $size;
