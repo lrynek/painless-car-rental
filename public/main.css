@@ -3,6 +3,22 @@ body {
     padding-top: 4.5rem;
 }
 
+.select2-container .select2-selection--multiple {
+    padding-bottom: 0;
+    min-height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    height: 30px;
+    margin-top: 0.5rem;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    vertical-align: top;
+}
+
 .header .navbar {
     background: #061936;
 }

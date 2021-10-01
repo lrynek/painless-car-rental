@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block filters %}
+    {% include 'search/_include/filters.html.twig' with { 'colors': colors } only %}
+{% endblock %}
+
 {% block main %}
     <section class="list">
         {% for car in cars %}

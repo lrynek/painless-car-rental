@@ -6,6 +6,7 @@ namespace App\Repository\Elasticsearch\ValueObject;
 use App\Repository\Elasticsearch\ValueObject\Criteria\Criterion;
 use App\Repository\Elasticsearch\ValueObject\Sorter\DefaultSorter;
 use App\Repository\Elasticsearch\ValueObject\Sorter\SorterInterface;
+use App\ValueObject\CriteriaInterface;
 use App\ValueObject\Pagination;
 
 final class Query
@@ -25,6 +26,7 @@ final class Query
 				'query' => [
 					'bool' => [
 						'must' => [],
+						'must_not' => [],
 						'should' => [],
 						'filter' => [],
 					],
@@ -58,7 +60,7 @@ final class Query
 		return $this;
 	}
 
-	public function setPagination(Pagination $pagination): void
+	public function setPagination(Pagination $pagination): self
 	{
 		$page = $pagination->page()->value();
 		$size = $pagination->resultsPerPage()->value();
@@ -66,37 +68,45 @@ final class Query
 
 		$this->structure['from'] = $from;
 		$this->structure['size'] = $size;
+
+		return $this;
 	}
 
-	public function appendMust(Criterion $criterion): void
+	public function applyCriteria(CriteriaInterface $criteria): self
 	{
-		$this->structure['query']['function_score']['query']['bool']['must'][] = $criterion->definition();
+		foreach ($criteria->required() as $requiredCriterion) {
+			$this->appendMust($requiredCriterion);
+		}
+
+		foreach ($criteria->additional() as $additionalCriterion) {
+			$this->appendShould($additionalCriterion);
+		}
+
+		foreach ($criteria->excluded() as $excludedCriterion) {
+			$this->appendMustNot($excludedCriterion);
+		}
+
+		return $this;
 	}
 
-	public function appendShould(Criterion $criterion): void
-	{
-		$this->structure['query']['function_score']['query']['bool']['should'][] = $criterion->definition();
-	}
-
-	public function appendFilter(Criterion $criterion): void
-	{
-		$this->structure['query']['function_score']['query']['bool']['filter'][] = $criterion->definition();
-	}
-
-	public function appendFunction(array $function): void
+	public function appendFunction(array $function): self
 	{
 		if (false === empty($function)) {
 			$this->structure['query']['function_score']['functions'][] = $function;
 		}
+
+		return $this;
 	}
 
-	public function setSorter(SorterInterface $sorter): void
+	public function setSorter(SorterInterface $sorter): self
 	{
 		$definition = $sorter->definition();
 
 		if (false === empty($definition)) {
 			$this->structure['sort'] = $definition;
 		}
+
+		return $this;
 	}
 
 	public function setMaxBoost(int $maxBoost): self
@@ -130,5 +140,51 @@ final class Query
 	public function toArray(): array
 	{
 		return $this->structure;
+	}
+
+	private function appendMust(Criterion $criterion): self
+	{
+		$definition = $criterion->definition();
+
+		if (isset($definition['terms'])) {
+			$termsQuery = $definition['terms'];
+
+			$definition = ['bool' => ['must' => []]];
+
+			foreach ($termsQuery as $field => $terms) {
+				foreach ($terms as $term) {
+					$definition['bool']['must'][] = [
+						'term' => [
+							$field => $term,
+						],
+					];
+				}
+			}
+		}
+
+		$this->structure['query']['function_score']['query']['bool']['must'][] = $definition;
+
+		return $this;
+	}
+
+	private function appendMustNot(Criterion $criterion): self
+	{
+		$this->structure['query']['function_score']['query']['bool']['must_not'][] = $criterion->definition();
+
+		return $this;
+	}
+
+	private function appendShould(Criterion $criterion): self
+	{
+		$this->structure['query']['function_score']['query']['bool']['should'][] = $criterion->definition();
+
+		return $this;
+	}
+
+	private function appendFilter(Criterion $criterion): self
+	{
+		$this->structure['query']['function_score']['query']['bool']['filter'][] = $criterion->definition();
+
+		return $this;
 	}
 }

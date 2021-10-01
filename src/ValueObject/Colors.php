@@ -35,4 +35,16 @@ final class Colors implements \IteratorAggregate, \Countable
 	{
 		return implode(' | ', $this->colors);
 	}
+
+	public function map(callable $callback): array
+	{
+		return array_map($callback, $this->colors);
+	}
+
+	public function toArray(): array
+	{
+		return $this->map(static function (Color $color) {
+			return (string)$color;
+		});
+	}
 }
