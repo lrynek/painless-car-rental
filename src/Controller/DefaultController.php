@@ -5,9 +5,9 @@ namespace App\Controller;
 
 use App\Controller\ParamConverter\CriteriaParamConverter;
 use App\Controller\ParamConverter\PageParamConverter;
+use App\Elasticsearch\ValueObject\Criteria\Criteria;
 use App\Enum\Color;
 use App\Repository\CarRepositoryInterface;
-use App\Repository\Elasticsearch\ValueObject\Criteria\Criteria;
 use App\ValueObject\PagesTotal;
 use App\ValueObject\Pagination;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -19,12 +19,17 @@ final class DefaultController extends AbstractController
 {
 	private const PAGE_DEFAULT = 1;
 
-	#[Route('/{page}', requirements: ['page' => '\d+'], defaults: ['page' => self::PAGE_DEFAULT])]
+	#[Route('/{page}', name: 'app_search', requirements: ['page' => '\d+'], defaults: ['page' => self::PAGE_DEFAULT])]
 	#[ParamConverter('pagination', class: PageParamConverter::class)]
 	#[ParamConverter('criteria', class: CriteriaParamConverter::class)]
 	public function list(CarRepositoryInterface $carRepository, Pagination $pagination, Criteria $criteria): Response
 	{
 		$cars = $carRepository->find($pagination, $criteria);
+
+		if ($cars->empty()) {
+			return $this->render('search/emptyList.html.twig', ['colors' => Color::all()]);
+		}
+
 		$pagesTotal = new PagesTotal($cars, $pagination->resultsPerPage());
 
 		return $this->render('search/list.html.twig', [

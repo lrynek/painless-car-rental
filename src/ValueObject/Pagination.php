@@ -5,7 +5,7 @@ namespace App\ValueObject;
 
 final class Pagination
 {
-	private const MAX_TOTAL = 10000;
+	private const MAX_TOTAL = 9999;
 
 	public function __construct(
 		private Page $page,

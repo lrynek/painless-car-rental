@@ -1,0 +1,15 @@
+{% extends 'search/list.html.twig' %}
+
+{% block filters %}
+    {% include 'search/_includes/filters.html.twig' with { 'colors': colors } only %}
+{% endblock %}
+
+{% block main %}
+    <section class="list">
+        <div class="alert alert-warning mt-3" role="alert">
+            No results found. Try with different criteria or <a href="{{ path('app_search') }}">clear all current filters</a>.
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer %}{% endblock %}

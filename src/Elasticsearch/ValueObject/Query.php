@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Repository\Elasticsearch\ValueObject;
+namespace App\Elasticsearch\ValueObject;
 
-use App\Repository\Elasticsearch\ValueObject\Criteria\Criterion;
-use App\Repository\Elasticsearch\ValueObject\Sorter\DefaultSorter;
-use App\Repository\Elasticsearch\ValueObject\Sorter\SorterInterface;
+use App\Elasticsearch\ValueObject\Criteria\Criterion;
+use App\Elasticsearch\ValueObject\Sorter\DefaultSorter;
+use App\Elasticsearch\ValueObject\Sorter\SorterInterface;
 use App\ValueObject\CriteriaInterface;
 use App\ValueObject\Pagination;
 

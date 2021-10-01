@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Repository\Elasticsearch\ValueObject\Sorter;
+namespace App\Elasticsearch\ValueObject\Sorter;
 
 interface SorterInterface
 {

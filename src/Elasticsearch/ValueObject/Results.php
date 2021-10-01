@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Repository\Elasticsearch\ValueObject;
+namespace App\Elasticsearch\ValueObject;
 
 use App\ValueObject\SearchResultsInterface;
 

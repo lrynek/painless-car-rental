@@ -1,34 +1,35 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Elasticsearch\Service;
 
-use App\Repository\Elasticsearch\ValueObject\Query;
-use App\Repository\Elasticsearch\ValueObject\Response;
+use App\Elasticsearch\ValueObject\Query;
+use App\Elasticsearch\ValueObject\Response;
+use App\Enum\Index;
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 
-final class ElasticsearchClient
+final class ApiClient implements ApiClientInterface
 {
 	private const ELASTICSEARCH_HOST = 'http://localhost:9200';
-	private const ELASTICSEARCH_SEARCH = '_search';
-	private const INDEX = 'cars';
+
+	private const ENDPOINT_SEARCH = '_search';
 
 	public function __construct(private ClientInterface $client)
 	{
 	}
 
-	public function search(Query $query): Response
+	public function search(Index $index, Query $query): Response
 	{
-		$url = $this->createEndpointUrl(self::ELASTICSEARCH_SEARCH);
+		$url = $this->createEndpointUrl($index->value(), self::ENDPOINT_SEARCH);
 		$response = $this->client->post($url, ['json' => $query->toArray()]);
 
 		return new Response($this->convertResponseToArray($response));
 	}
 
-	private function createEndpointUrl(string $endpoint): string
+	private function createEndpointUrl(string $index, string $endpoint): string
 	{
-		return implode(DIRECTORY_SEPARATOR, [self::ELASTICSEARCH_HOST, self::INDEX, $endpoint]);
+		return implode(DIRECTORY_SEPARATOR, [self::ELASTICSEARCH_HOST, $index, $endpoint]);
 	}
 
 	private function convertResponseToArray(ResponseInterface $response): array

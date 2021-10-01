@@ -12,6 +12,7 @@ final class PagesTotal
 	public function __construct(PagesTotalAwareInterface $results, ResultsPerPage $resultsPerPage)
 	{
 		$this->value = (int)floor($results->total() / $resultsPerPage->value());
+		$this->validate();
 	}
 
 	public function value(): int
@@ -31,5 +32,12 @@ final class PagesTotal
 		$page = $page instanceof Page ? $page->value() : $page;
 
 		return $this->value === $page;
+	}
+
+	private function validate(): void
+	{
+		if (self::MIN_PAGE > $this->value) {
+			throw new \InvalidArgumentException;
+		}
 	}
 }

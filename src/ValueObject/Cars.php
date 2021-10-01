@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace App\ValueObject;
 
-use App\Repository\Elasticsearch\ValueObject\Response;
-use App\Repository\Elasticsearch\ValueObject\Result;
+use App\Elasticsearch\ValueObject\Response;
+use App\Elasticsearch\ValueObject\Result;
+use JetBrains\PhpStorm\Pure;
 
 final class Cars implements \IteratorAggregate, \Countable, PagesTotalAwareInterface
 {
@@ -42,5 +43,11 @@ final class Cars implements \IteratorAggregate, \Countable, PagesTotalAwareInter
 	{
 		$this->total = $total;
 		$this->cars = $cars;
+	}
+
+	#[Pure]
+	public function empty(): bool
+	{
+		return 0 === $this->count();
 	}
 }

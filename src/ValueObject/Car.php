@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\ValueObject;
 
-use App\Repository\Elasticsearch\ValueObject\Result;
+use App\Elasticsearch\ValueObject\Result;
 
 final class Car
 {

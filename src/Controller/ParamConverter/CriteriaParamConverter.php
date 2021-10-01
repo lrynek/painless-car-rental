@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller\ParamConverter;
 
-use App\Repository\Elasticsearch\ValueObject\Criteria\ColorsFilter;
-use App\Repository\Elasticsearch\ValueObject\Criteria\Criteria;
-use App\Repository\Elasticsearch\ValueObject\Criteria\PhraseFilter;
+use App\Elasticsearch\ValueObject\Criteria\ColorsFilter;
+use App\Elasticsearch\ValueObject\Criteria\Criteria;
+use App\Elasticsearch\ValueObject\Criteria\PhraseFilter;
 use App\ValueObject\Colors;
 use App\ValueObject\Phrase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

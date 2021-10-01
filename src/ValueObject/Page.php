@@ -6,7 +6,7 @@ namespace App\ValueObject;
 final class Page
 {
 	private const MIN_VALUE = 1;
-	private const MAX_VALUE = 10000;
+	private const MAX_VALUE = 9999;
 
 	public function __construct(private int $value)
 	{

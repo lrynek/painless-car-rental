@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block filters %}
-    {% include 'search/_include/filters.html.twig' with { 'colors': colors } only %}
+    {% include 'search/_includes/filters.html.twig' with { 'colors': colors } only %}
 {% endblock %}
 
 {% block main %}
     <section class="list">
         {% for car in cars %}
-            {% include 'search/_include/car.html.twig' with { 'car': car } only %}
+            {% include 'search/_includes/car.html.twig' with { 'car': car } only %}
         {% endfor %}
     </section>
 {% endblock %}
 
 {% block footer %}
     {{ parent() }}
-    {% include 'search/_include/pagination.html.twig' with { 'pagesTotal': pagesTotal, 'pagination': pagination } only %}
+    {% include 'search/_includes/pagination.html.twig' with { 'pagesTotal': pagesTotal, 'pagination': pagination } only %}
 {% endblock %}
