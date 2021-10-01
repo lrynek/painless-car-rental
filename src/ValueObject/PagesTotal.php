@@ -11,7 +11,12 @@ final class PagesTotal
 
 	public function __construct(PagesTotalAwareInterface $results, ResultsPerPage $resultsPerPage)
 	{
-		$this->value = (int)floor($results->total() / $resultsPerPage->value());
+		if ($resultsPerPage->value() > $results->total()) {
+			$this->value = self::MIN_PAGE;
+		} else {
+			$this->value = (int)floor($results->total() / $resultsPerPage->value());
+		}
+
 		$this->validate();
 	}
 
