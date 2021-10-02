@@ -3,21 +3,17 @@ declare(strict_types=1);
 
 namespace App\ValueObject;
 
-use App\Elasticsearch\ValueObject\Result;
-
 final class Car
 {
-	public static function fromResult(Result $result): self
+	public function __construct(
+		private Producer           $producer,
+		private Model              $model,
+		private Picture            $picture,
+		private ProductionYear     $productionYear,
+		private Colors             $colors,
+		private AdditionalServices $services,
+	)
 	{
-		$values = $result->source();
-
-		return new self(
-			new Producer($values['producer'] ?? ''),
-			new Model($values['model'] ?? ''),
-			new Picture($values['picture'] ?? ''),
-			new ProductionYear($values['production_year'] ?? 0),
-			Colors::fromArray($values['colors'] ?? []),
-		);
 	}
 
 	public function producer(): Producer
@@ -50,13 +46,8 @@ final class Car
 		return $this->colors;
 	}
 
-	private function __construct(
-		private Producer       $producer,
-		private Model          $model,
-		private Picture        $picture,
-		private ProductionYear $productionYear,
-		private Colors         $colors,
-	)
+	public function services(): AdditionalServices
 	{
+		return $this->services;
 	}
 }

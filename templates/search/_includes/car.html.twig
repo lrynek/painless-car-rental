@@ -5,27 +5,10 @@
         </div>
         <div class="col-md-8 details">
             <div class="card-header bg-transparent">
-                <h5 class="card-title">{{ car.fullName }} <small class="text-muted">{{ car.productionYear }}</small></h5>
+                <h5 class="card-title">{{ car.fullName }}<small class="text-muted">{{ car.productionYear }}</small></h5>
             </div>
             <div class="card-body">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <ul>
-                            <li>An item</li>
-                            <li>A second item</li>
-                            <li>A third item</li>
-                            <li>A fourth item</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-7">
-                        <ul>
-                            <li>An item</li>
-                            <li>A second item</li>
-                            <li>A third item</li>
-                            <li>A fourth item</li>
-                        </ul>
-                    </div>
-                </div>
+                {% include 'search/_includes/services.html.twig' with { 'carServices': car.services } only %}
             </div>
             <div class="card-footer bg-transparent text-right colors">
                 Colors:

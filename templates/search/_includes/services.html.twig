@@ -1,0 +1,24 @@
+{% if not carServices.isEmpty() %}
+    <div class="row g-0 justify-content-start">
+        {% set services = carServices|slice(0,4) %}
+        {% if services|length %}
+            <div class="col-4">
+                <ul>
+                    {% for service in services %}
+                        <li>{{ service.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% set services = carServices|slice(4,4) %}
+        {% if services|length %}
+            <div class="col-4">
+                <ul>
+                    {% for service in services %}
+                        <li>{{ service.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

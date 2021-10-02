@@ -12,6 +12,12 @@ final class Cars implements \IteratorAggregate, \Countable, PagesTotalAwareInter
 	private int $total;
 	private array $cars;
 
+	public function __construct(int $total, Car ...$cars)
+	{
+		$this->total = $total;
+		$this->cars = $cars;
+	}
+
 	public static function fromResponse(Response $response): self
 	{
 		$cars = $response->results()->map(static function (Result $result) {
@@ -37,12 +43,6 @@ final class Cars implements \IteratorAggregate, \Countable, PagesTotalAwareInter
 	public function total(): int
 	{
 		return $this->total;
-	}
-
-	private function __construct(int $total, Car ...$cars)
-	{
-		$this->total = $total;
-		$this->cars = $cars;
 	}
 
 	#[Pure]

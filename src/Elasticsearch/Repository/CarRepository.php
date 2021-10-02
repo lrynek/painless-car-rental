@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Elasticsearch\Repository;
 
+use App\Elasticsearch\Hydrator\CarsHydratorInterface;
 use App\Elasticsearch\Service\ApiClientInterface;
 use App\Elasticsearch\ValueObject\Criteria\Criteria;
 use App\Elasticsearch\ValueObject\Query;
@@ -18,7 +19,10 @@ final class CarRepository implements CarRepositoryInterface
 {
 	private Index $index;
 
-	public function __construct(private ApiClientInterface $client)
+	public function __construct(
+		private ApiClientInterface $client,
+		private CarsHydratorInterface $hydrator
+	)
 	{
 		$this->index = Index::CARS();
 	}
@@ -33,6 +37,6 @@ final class CarRepository implements CarRepositoryInterface
 
 		$response = $this->client->search($this->index, $query);
 
-		return Cars::fromResponse($response);
+		return $this->hydrator->hydrate($response);
 	}
 }
