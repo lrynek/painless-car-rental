@@ -5,10 +5,10 @@
 </button>
 <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
     <form method="get" action="" class="d-flex align-items-middle" data-np-checked="1">
-        <button class="btn btn-outline-success me-2" type="submit">Search</button>
         <input name="filters[phrase]"
                value="{{ filters.phrase is defined ? filters.phrase : '' }}"
                class="form-control me-2"
+               style="max-width: 230px;"
                type="search"
                placeholder="Phrase"
                aria-label="Search"
@@ -17,7 +17,7 @@
         >
 
         <select name="filters[colors][]"
-                class="form-select form-control js-select2"
+                class="form-select form-control me-2 js-select2"
                 size="1"
                 aria-label="size 1 select colors"
                 style="width: 230px; line-height: 100%"
@@ -36,7 +36,23 @@
             {% endfor %}
         </select>
 
-        <button class="btn btn-outline-danger ms-2" onclick="window.location.href = '/'; return false;">Clear</button>
+        <select name="filters[services][]"
+                class="form-select form-control js-select2"
+                size="1"
+                aria-label="size 1 select services"
+                style="width: 230px; line-height: 100%"
+                data-placeholder="Services"
+                multiple
+        >
+            {% for service in services %}
+                <option value="{{ service.id }}"
+                        {{ filters.services is defined and service.id.value in filters.services ? 'selected' : '' }}
+                >{{ service }}</option>
+            {% endfor %}
+        </select>
+
+        <button class="btn btn-outline-success ms-2" type="submit">Search</button>
         <button class="btn btn-outline-warning ms-2" type="reset">Reset</button>
+        <button class="btn btn-outline-danger ms-2" onclick="window.location.href = '/'; return false;">Clear</button>
     </form>
 </div>

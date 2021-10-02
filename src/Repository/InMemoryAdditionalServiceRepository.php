@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\ValueObject\AdditionalService;
+use App\ValueObject\AdditionalServices;
 use App\ValueObject\Id;
 use App\ValueObject\Name;
 use JetBrains\PhpStorm\Pure;
@@ -30,5 +31,11 @@ final class InMemoryAdditionalServiceRepository implements AdditionalServiceRepo
 	public function findOneById(Id $id): AdditionalService
 	{
 		return $this->services[$id->value()] ?? throw new \OutOfRangeException;
+	}
+
+	#[Pure]
+	public function findAll(): AdditionalServices
+	{
+		return new AdditionalServices(...$this->services);
 	}
 }

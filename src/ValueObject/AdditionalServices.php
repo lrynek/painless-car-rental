@@ -28,4 +28,9 @@ final class AdditionalServices implements \IteratorAggregate, \Countable
 	{
 		return count($this->services);
 	}
+
+	public function getIds(): array
+	{
+		return array_map(static fn(AdditionalService $service) => $service->id()->value(), $this->services);
+	}
 }

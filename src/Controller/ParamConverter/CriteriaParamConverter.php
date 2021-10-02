@@ -6,7 +6,11 @@ namespace App\Controller\ParamConverter;
 use App\Elasticsearch\ValueObject\Criteria\ColorsFilter;
 use App\Elasticsearch\ValueObject\Criteria\Criteria;
 use App\Elasticsearch\ValueObject\Criteria\PhraseFilter;
+use App\Elasticsearch\ValueObject\Criteria\ServicesFilter;
+use App\Repository\AdditionalServiceRepositoryInterface;
+use App\ValueObject\AdditionalServices;
 use App\ValueObject\Colors;
+use App\ValueObject\Id;
 use App\ValueObject\Phrase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +21,11 @@ final class CriteriaParamConverter extends AbstractParamConverter
 
 	private const FILTER_PHRASE = 'phrase';
 	private const FILTER_COLORS = 'colors';
+	private const FILTER_SERVICES = 'services';
+
+	public function __construct(private AdditionalServiceRepositoryInterface $serviceRepository)
+	{
+	}
 
 	public function apply(Request $request, ParamConverter $configuration): bool
 	{
@@ -26,6 +35,7 @@ final class CriteriaParamConverter extends AbstractParamConverter
 
 		$this->processPhrase($criteria, $filters);
 		$this->processColors($criteria, $filters);
+		$this->processServices($criteria, $filters);
 
 		$request->attributes->set($param, $criteria);
 
@@ -43,7 +53,7 @@ final class CriteriaParamConverter extends AbstractParamConverter
 		$criteria->addRequired(new PhraseFilter(new Phrase($phrase)));
 	}
 
-	protected function processColors(Criteria $criteria, array $filters): void
+	private function processColors(Criteria $criteria, array $filters): void
 	{
 		$colors = $filters[self::FILTER_COLORS] ?? [];
 
@@ -61,7 +71,26 @@ final class CriteriaParamConverter extends AbstractParamConverter
 			->addExcluded(new ColorsFilter(Colors::fromArray($excluded)));
 	}
 
-	protected function extractColors(array $colors, string $group): array
+	private function processServices(Criteria $criteria, mixed $filters): void
+	{
+		$services = $filters[self::FILTER_SERVICES] ?? [];
+
+		if (empty($services)) {
+			return;
+		}
+
+		$services = array_values(
+			array_map(
+				fn(string $id) => $this->serviceRepository->findOneById(new Id((int)$id)),
+				$services
+			)
+		);
+
+
+		$criteria->addRequired(new ServicesFilter(new AdditionalServices(...$services)));
+	}
+
+	private function extractColors(array $colors, string $group): array
 	{
 		return array_map(
 			static fn(string $color): string => str_replace($group, '', $color),

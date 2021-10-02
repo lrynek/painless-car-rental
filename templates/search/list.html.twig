@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block filters %}
-    {% include 'search/_includes/filters.html.twig' with { 'colors': colors } only %}
+    {% include 'search/_includes/filters.html.twig' with { 'colors': colors, 'services': services } only %}
 {% endblock %}
 
 {% block main %}
