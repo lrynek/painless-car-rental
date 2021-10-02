@@ -4,6 +4,7 @@ body {
 }
 
 .select2-container .select2-selection--multiple {
+    margin-right: 0.5rem;
     padding-bottom: 0;
     min-height: 40px;
     max-height: 40px;
