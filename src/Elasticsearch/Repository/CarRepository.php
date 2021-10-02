@@ -32,7 +32,6 @@ final class CarRepository implements CarRepositoryInterface
 			->setPagination($pagination)
 			->setSorter(new RecommendedSorter)
 			->applyCriteria($criteria ?? new Criteria);
-		dump(json_encode($query->toArray()));
 
 		$response = $this->client->search($this->index, $query);
 
