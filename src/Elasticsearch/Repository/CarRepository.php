@@ -13,7 +13,6 @@ use App\Repository\CarRepositoryInterface;
 use App\ValueObject\Cars;
 use App\ValueObject\CriteriaInterface;
 use App\ValueObject\Pagination;
-use JetBrains\PhpStorm\Pure;
 
 final class CarRepository implements CarRepositoryInterface
 {
@@ -27,13 +26,13 @@ final class CarRepository implements CarRepositoryInterface
 		$this->index = Index::CARS();
 	}
 
-	#[Pure]
-	public function find(Pagination $pagination, ?CriteriaInterface $criteria = null): Cars
+		public function find(Pagination $pagination, ?CriteriaInterface $criteria = null): Cars
 	{
 		$query = (new Query)
 			->setPagination($pagination)
 			->setSorter(new RecommendedSorter)
 			->applyCriteria($criteria ?? new Criteria);
+		dump(json_encode($query->toArray()));
 
 		$response = $this->client->search($this->index, $query);
 

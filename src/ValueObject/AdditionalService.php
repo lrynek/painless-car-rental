@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\ValueObject;
 
-use JetBrains\PhpStorm\Pure;
-
 final class AdditionalService
 {
 	public function __construct(
@@ -24,7 +22,6 @@ final class AdditionalService
 		return $this->name;
 	}
 
-	#[Pure]
 	public function __toString(): string
 	{
 		return $this->name->value();

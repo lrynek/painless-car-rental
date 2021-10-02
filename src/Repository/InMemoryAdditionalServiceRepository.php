@@ -7,7 +7,6 @@ use App\ValueObject\AdditionalService;
 use App\ValueObject\AdditionalServices;
 use App\ValueObject\Id;
 use App\ValueObject\Name;
-use JetBrains\PhpStorm\Pure;
 
 final class InMemoryAdditionalServiceRepository implements AdditionalServiceRepositoryInterface
 {
@@ -27,14 +26,12 @@ final class InMemoryAdditionalServiceRepository implements AdditionalServiceRepo
 		];
 	}
 
-	#[Pure]
-	public function findOneById(Id $id): AdditionalService
+		public function findOneById(Id $id): AdditionalService
 	{
 		return $this->services[$id->value()] ?? throw new \OutOfRangeException;
 	}
 
-	#[Pure]
-	public function findAll(): AdditionalServices
+		public function findAll(): AdditionalServices
 	{
 		return new AdditionalServices(...$this->services);
 	}

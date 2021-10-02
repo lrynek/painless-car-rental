@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace App\Elasticsearch\ValueObject;
 
 use App\Elasticsearch\ValueObject\Criteria\Criterion;
+use App\Elasticsearch\ValueObject\Factor\FactorInterface;
 use App\Elasticsearch\ValueObject\Sorter\DefaultSorter;
+use App\Elasticsearch\ValueObject\Sorter\FactorSorterInterface;
 use App\Elasticsearch\ValueObject\Sorter\SorterInterface;
 use App\ValueObject\CriteriaInterface;
 use App\ValueObject\Pagination;
@@ -89,8 +91,10 @@ final class Query
 		return $this;
 	}
 
-	public function appendFunction(array $function): self
+	public function appendFunction(FactorInterface $factor): self
 	{
+		$function = $factor->definition($this);
+
 		if (false === empty($function)) {
 			$this->structure['query']['function_score']['functions'][] = $function;
 		}
@@ -104,6 +108,13 @@ final class Query
 
 		if (false === empty($definition)) {
 			$this->structure['sort'] = $definition;
+		}
+
+		if ($sorter instanceof FactorSorterInterface) {
+			/** @var FactorInterface $factor */
+			foreach ($sorter->factors() as $factor) {
+				$this->appendFunction($factor);
+			}
 		}
 
 		return $this;
@@ -140,6 +151,13 @@ final class Query
 	public function toArray(): array
 	{
 		return $this->structure;
+	}
+
+	public function filteredColor(): string
+	{
+//		foreach ($this->structure['query']['function_score']['query']['bool']['must'] as $must) {
+//			if ($must['terms'])
+//		}
 	}
 
 	private function appendMust(Criterion $criterion): self
