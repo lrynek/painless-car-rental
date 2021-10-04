@@ -33,7 +33,7 @@ final class ColorRelevanceFactor extends WeightFactor
     			return 0;
 			}
 
-            def theOnlyColorValue = 1 === doc['colors'].size() ? 1.0 : 0.0;
+            def colorExclusivnessFactor = (params.maximumColorsPerDocument + 1.0 - doc['colors'].size()) / params.maximumColorsPerDocument * 0.25;
 
             def requiredColorsCount = params.requiredColors.size();
 			def positionsFactorSum = params.requiredColors
@@ -44,13 +44,13 @@ final class ColorRelevanceFactor extends WeightFactor
 
                     def position = params._source['colors'].indexOf(requiredColor) + 1.0;
 
-					return (params.maximumColorsPerDocument + 1.0 - position ) / params.maximumColorsPerDocument;
+					return (params.maximumColorsPerDocument + 1.0 - position) / params.maximumColorsPerDocument;
 				})
-				.sum();
+				.sum() * 0.75;
 
-            def positionValue = positionsFactorSum / requiredColorsCount;
+            def colorPositionFactor = positionsFactorSum / requiredColorsCount;
 
-			return (theOnlyColorValue + positionValue) / 2.0;
+			return (colorExclusivnessFactor + colorPositionFactor);
 JS;
 	}
 
