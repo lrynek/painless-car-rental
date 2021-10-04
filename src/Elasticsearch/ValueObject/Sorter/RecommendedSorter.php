@@ -14,9 +14,9 @@ final class RecommendedSorter implements FactorSorterInterface
 	public function __construct(private ?Factors $factors = null)
 	{
 		$this->factors ??= new Factors(
-//			new RawScoreFactor(new Weight(10)),
-//			new DodgePromoFactor(new Weight(100)),
-//			new BlueColorRelevanceFactor(new Weight(50)),
+			new RawScoreFactor(new Weight(10)),
+			new DodgePromoFactor(new Weight(100)),
+			new BlueColorRelevanceFactor(new Weight(50)),
 		);
 	}
 

@@ -23,12 +23,11 @@ final class BlueColorRelevanceFactor extends WeightFactor
 	private function script(): string
 	{
 		return <<<JS
-			if (f)
-			if (false === doc['colors'].contains('blue')) {
+			if (false === doc['colors'].contains(params.filtered_color)) {
     			return 0;
 			}
 			
-			def position = doc['colors'].indexOf('blue');
+			def position = doc['colors'].indexOf(params.filtered_color);
 			
 			return (4 - position) / 3;
 JS;
@@ -37,7 +36,7 @@ JS;
 	private function params(Query $query): array
 	{
 		return [
-			'filtered_color' => $query->filteredColor()
+			'filtered_color' => $query->filteredColor(),
 		];
 	}
 }

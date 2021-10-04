@@ -5,7 +5,7 @@
         </div>
         <div class="col-md-8 details">
             <div class="card-header bg-transparent">
-                <h5 class="card-title">{{ car.fullName }}<small class="text-muted">{{ car.productionYear }}</small></h5>
+                <h5 class="card-title">{{ car.fullName }} <small class="text-muted">{{ car.productionYear }}</small></h5>
             </div>
             <div class="card-body">
                 {% include 'search/_includes/services.html.twig' with { 'carServices': car.services } only %}
