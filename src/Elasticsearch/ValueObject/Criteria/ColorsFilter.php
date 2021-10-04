@@ -21,4 +21,9 @@ final class ColorsFilter implements Criterion
 			],
 		];
 	}
+
+	public function colors(): Colors
+	{
+		return $this->colors;
+	}
 }

@@ -19,19 +19,17 @@ final class CarRepository implements CarRepositoryInterface
 	private Index $index;
 
 	public function __construct(
-		private ApiClientInterface $client,
+		private ApiClientInterface    $client,
 		private CarsHydratorInterface $hydrator
 	)
 	{
 		$this->index = Index::CARS();
 	}
 
-		public function find(Pagination $pagination, ?CriteriaInterface $criteria = null): Cars
+	public function find(Pagination $pagination, ?CriteriaInterface $criteria = null): Cars
 	{
-		$query = (new Query)
-			->setPagination($pagination)
-			->applyCriteria($criteria ?? new Criteria)
-			->setSorter(new RecommendedSorter);
+		$query = new Query($pagination, $criteria ?? new Criteria);
+		$query->setSorter(new RecommendedSorter);
 
 		$response = $this->client->search($this->index, $query);
 

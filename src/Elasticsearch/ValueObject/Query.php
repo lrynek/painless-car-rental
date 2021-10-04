@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Elasticsearch\ValueObject;
 
+use App\Elasticsearch\ValueObject\Criteria\ColorsFilter;
 use App\Elasticsearch\ValueObject\Criteria\Criterion;
 use App\Elasticsearch\ValueObject\Factor\FactorInterface;
 use App\Elasticsearch\ValueObject\Sorter\DefaultSorter;
@@ -17,6 +18,9 @@ final class Query
 	private const DEFAULT_EXPLAIN = false;
 	private const DEFAULT_FROM = 0;
 	private const DEFAULT_SIZE = 10;
+	private const DEFAULT_BOOST_MODE = 'replace';
+	private const DEFAULT_SCORE_MODE = 'sum';
+	private const DEFAULT_MIN_SCORE = 0;
 
 	private array $structure = [
 		'_source' => self::DEFAULT_SOURCE,
@@ -34,18 +38,21 @@ final class Query
 					],
 				],
 				'functions' => [],
-				'boost_mode' => 'replace',
-				'score_mode' => 'sum',
-				'min_score' => 0,
+				'boost_mode' => self::DEFAULT_BOOST_MODE,
+				'score_mode' => self::DEFAULT_SCORE_MODE,
+				'min_score' => self::DEFAULT_MIN_SCORE,
 			],
 		],
 		'sort' => [],
 	];
+	private CriteriaInterface $criteria;
 
-	public function __construct(array $structure = [])
+	public function __construct(Pagination $pagination, CriteriaInterface $criteria)
 	{
-		$this->setSorter(new DefaultSorter);
-		$this->structure = array_merge($this->structure, $structure);
+		$this
+			->setPagination($pagination)
+			->applyCriteria($criteria)
+			->setSorter(new DefaultSorter);
 	}
 
 	public function setSource(bool|array $source): self
@@ -62,7 +69,7 @@ final class Query
 		return $this;
 	}
 
-	public function setPagination(Pagination $pagination): self
+	private function setPagination(Pagination $pagination): self
 	{
 		$page = $pagination->page()->value();
 		$size = $pagination->resultsPerPage()->value();
@@ -70,34 +77,6 @@ final class Query
 
 		$this->structure['from'] = $from;
 		$this->structure['size'] = $size;
-
-		return $this;
-	}
-
-	public function applyCriteria(CriteriaInterface $criteria): self
-	{
-		foreach ($criteria->required() as $requiredCriterion) {
-			$this->appendMust($requiredCriterion);
-		}
-
-		foreach ($criteria->additional() as $additionalCriterion) {
-			$this->appendShould($additionalCriterion);
-		}
-
-		foreach ($criteria->excluded() as $excludedCriterion) {
-			$this->appendMustNot($excludedCriterion);
-		}
-
-		return $this;
-	}
-
-	public function appendFunction(FactorInterface $factor): self
-	{
-		$function = $factor->definition($this);
-
-		if (false === empty($function)) {
-			$this->structure['query']['function_score']['functions'][] = $function;
-		}
 
 		return $this;
 	}
@@ -115,6 +94,17 @@ final class Query
 			foreach ($sorter->factors() as $factor) {
 				$this->appendFunction($factor);
 			}
+		}
+
+		return $this;
+	}
+
+	public function appendFunction(FactorInterface $factor): self
+	{
+		$function = $factor->definition($this);
+
+		if (false === empty($function)) {
+			$this->structure['query']['function_score']['functions'][] = $function;
 		}
 
 		return $this;
@@ -156,14 +146,32 @@ final class Query
 	public function requiredColors(): array
 	{
 		$requiredColors = [];
-
-		foreach ($this->structure['query']['function_score']['query']['bool']['must'] as $mustOuter) {
-			foreach ($mustOuter['bool']['must'] ?? [] as $must) {
-				$requiredColors[] = (string)($must['term']['colors'] ?? '');
+		foreach ($this->criteria->required() as $requiredCriterion) {
+			if ($requiredCriterion instanceof ColorsFilter) {
+				$requiredColors = $requiredCriterion->colors()->toArray();
 			}
 		}
 
 		return $requiredColors;
+	}
+
+	private function applyCriteria(CriteriaInterface $criteria): self
+	{
+		$this->criteria = $criteria;
+
+		foreach ($criteria->required() as $requiredCriterion) {
+			$this->appendMust($requiredCriterion);
+		}
+
+		foreach ($criteria->additional() as $additionalCriterion) {
+			$this->appendShould($additionalCriterion);
+		}
+
+		foreach ($criteria->excluded() as $excludedCriterion) {
+			$this->appendMustNot($excludedCriterion);
+		}
+
+		return $this;
 	}
 
 	private function appendMust(Criterion $criterion): self
