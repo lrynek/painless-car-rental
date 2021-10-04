@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Elasticsearch\ValueObject\Sorter;
 
-use App\Elasticsearch\ValueObject\Factor\BlueColorRelevanceFactor;
+use App\Elasticsearch\ValueObject\Factor\ColorRelevanceFactor;
 use App\Elasticsearch\ValueObject\Factor\DodgePromoFactor;
 use App\Elasticsearch\ValueObject\Factor\Factors;
 use App\Elasticsearch\ValueObject\Factor\RawScoreFactor;
@@ -16,7 +16,7 @@ final class RecommendedSorter implements FactorSorterInterface
 		$this->factors ??= new Factors(
 			new RawScoreFactor(new Weight(10)),
 			new DodgePromoFactor(new Weight(100)),
-			new BlueColorRelevanceFactor(new Weight(50)),
+			new ColorRelevanceFactor(new Weight(50)),
 		);
 	}
 

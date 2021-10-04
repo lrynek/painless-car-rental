@@ -153,15 +153,17 @@ final class Query
 		return $this->structure;
 	}
 
-	public function filteredColor(): string
+	public function requiredColors(): array
 	{
+		$requiredColors = [];
+
 		foreach ($this->structure['query']['function_score']['query']['bool']['must'] as $mustOuter) {
 			foreach ($mustOuter['bool']['must'] ?? [] as $must) {
-				return (string)($must['term']['colors'] ?? '');
+				$requiredColors[] = (string)($must['term']['colors'] ?? '');
 			}
 		}
 
-		return '';
+		return $requiredColors;
 	}
 
 	private function appendMust(Criterion $criterion): self
