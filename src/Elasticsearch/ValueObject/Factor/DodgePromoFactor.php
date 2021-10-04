@@ -17,7 +17,7 @@ final class DodgePromoFactor extends WeightFactor
 				'bool' => [
 					'must' => [
 						[
-							'term' => [
+							'match' => [
 								self::FIELD_PRODUCER => self::PRODUCER_DODGE,
 							],
 						],
