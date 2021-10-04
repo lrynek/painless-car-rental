@@ -33,8 +33,10 @@ final class ColorRelevanceFactor extends WeightFactor
     			return 0;
 			}
 
+            def theOnlyColorValue = 1 === doc['colors'].size() ? 1.0 : 0.0;
+
             def requiredColorsCount = params.requiredColors.size();
-			def sum = params.requiredColors
+			def positionsFactorSum = params.requiredColors
 				.collect( requiredColor -> {
 					if (false === doc['colors'].contains(requiredColor)) {	
 						return 0;
@@ -46,7 +48,9 @@ final class ColorRelevanceFactor extends WeightFactor
 				})
 				.sum();
 
-			return sum / requiredColorsCount;
+            def positionValue = positionsFactorSum / requiredColorsCount;
+
+			return (theOnlyColorValue + positionValue) / 2.0;
 JS;
 	}
 
