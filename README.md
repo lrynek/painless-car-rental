@@ -18,12 +18,16 @@ If you need to change the Elasticsearch host the application uses, [it's defined
 In order to run the project, it is advisable to install an instance of latest stable version of Elasticsearch (it's 7.16.0 version at the moment of the presentation https://www.elastic.co/guide/en/elasticsearch/reference/7.16/index.html)
 
 ## Setup
-1. Create `cars` index in Elasticsearch
-2. Populate the index with sample data
+1. Create `cars` index in Elasticsearch ([`Index/Create` HTTP request](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests/Index/Create.http)*)
+2. Populate the index with sample cars data ([`Index/Bulk` HTTP request](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests/Index/Bulk.http)*)
 3. Go to project's root directory in the terminal
 4. `cp .env.dist .env`
 5. `symfony server:start`
 6. Go to http://127.0.0.1:8000/
+
+>(*) - all HTTP requests can be executed either:
+>- from within [PhpStorm's built-in REST HTTP client](https://www.jetbrains.com/help/phpstorm/http-client-in-product-code-editor.html) (samples in [.elasticsearch-http-requests directory](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests))
+>- in [Insomnia REST HTTP client](https://insomnia.rest/) (import [insomnia.json file](https://github.com/lrynek/phpers-2021/blob/main/insomnia.json) with all the samples)
 
 ## How to play with it?
 All Elasticsearch implementation related code is placed in `src/Elasticsearch` directory.
