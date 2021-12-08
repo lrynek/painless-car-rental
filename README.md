@@ -60,6 +60,8 @@ final class RecommendedSorter implements FactorSorterInterface
 }
 ```
 
+💡 You can comment out any of the factors to see how they contribute to the ranking.
+
 💡 You can add any other factor you want on base of those existing ones.
 
 💡 You can also play with all those factors' weights as well in the `RecommendedSorter` constructor and see the influence on the overall ranking.
