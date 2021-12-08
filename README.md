@@ -22,7 +22,7 @@ In order to run the project, it is advisable to install an instance of latest st
 1. Create `cars` index in Elasticsearch ([`Index/Create` HTTP request](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests/Index/Create.http)*)
 2. Populate the index with sample cars data ([`Index/Bulk` HTTP request](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests/Index/Bulk.http)*)
 3. Go to project's root directory in the terminal
-4. Start Symfony server `symfony server:start`
+4. Start Symfony server `symfony server:start --no-tls`
 5. Go to http://127.0.0.1:8000/
 
 >(*) - all HTTP requests can be executed either:
