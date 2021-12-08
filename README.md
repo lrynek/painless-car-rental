@@ -11,6 +11,7 @@ This is the simple educational project prepared to support my recent presentatio
 
 ## Requirements
 - PHP 8.0.9
+- Symfony CLI (https://symfony.com/download)
 - Elasticsearch 7.16.0 running on `localhost:9200`
 
 If you need to change the Elasticsearch host the application uses, [it's defined in the `ApiClient` class as a constant](https://github.com/lrynek/phpers-2021/blob/b4a8431ffd73c7417b00d6428ef491c91b45960f/src/Elasticsearch/Service/ApiClient.php#L14) (normally worth passing it from `.env` params file 😉 )
@@ -21,9 +22,8 @@ In order to run the project, it is advisable to install an instance of latest st
 1. Create `cars` index in Elasticsearch ([`Index/Create` HTTP request](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests/Index/Create.http)*)
 2. Populate the index with sample cars data ([`Index/Bulk` HTTP request](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests/Index/Bulk.http)*)
 3. Go to project's root directory in the terminal
-4. `cp .env.dist .env`
-5. `symfony server:start`
-6. Go to http://127.0.0.1:8000/
+4. Start Symfony server `symfony server:start`
+5. Go to http://127.0.0.1:8000/
 
 >(*) - all HTTP requests can be executed either:
 >- from within [PhpStorm's built-in REST HTTP client](https://www.jetbrains.com/help/phpstorm/http-client-in-product-code-editor.html) (samples in [.elasticsearch-http-requests directory](https://github.com/lrynek/phpers-2021/blob/main/.elasticsearch-http-requests))
