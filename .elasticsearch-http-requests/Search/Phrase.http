@@ -1,0 +1,38 @@
+POST http://localhost:9200/cars/_search
+Content-Type: application/json
+
+{
+  "_source": true,
+  "explain": false,
+  "from": 0,
+  "size": 3,
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "query_string": {
+                "query": "mclaren",
+                "fields": [
+                  "producer",
+                  "model"
+                ]
+              }
+            }
+          ],
+          "must_not": [],
+          "should": [],
+          "filter": []
+        }
+      },
+      "functions": [],
+      "boost_mode": "replace",
+      "score_mode": "sum",
+      "min_score": 0
+    }
+  },
+  "sort": {
+    "_score": "desc"
+  }
+}

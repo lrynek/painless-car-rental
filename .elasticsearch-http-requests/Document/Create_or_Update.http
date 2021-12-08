@@ -1,0 +1,14 @@
+## The last number is the id of a document
+PUT http://localhost:9200/cars/_doc/39
+Content-Type: application/json
+
+{
+  "producer": "Mitsubishi",
+  "model": "Lancer Evo X",
+  "picture": "mitsubishi-lancer-evo-x.jpg",
+  "production_year": 2010,
+  "colors": [
+    "red",
+    "black"
+  ]
+}

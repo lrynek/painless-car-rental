@@ -1,0 +1,81 @@
+POST http://localhost:9200/cars/_bulk
+Content-Type: application/x-ndjson
+
+{"update":{"_index":"cars","_type":"_doc","_id":"1"}}
+{"doc":{"producer":"Ferrari","model":"SF90","picture":"ferrari-sf90.jpg","production_year":2021,"colors":["red"],"service_ids":[2,4,6,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"2"}}
+{"doc":{"producer":"Ferrari","model":"Roma","picture":"ferrari-roma.jpg","production_year":2021,"colors":["silver"],"service_ids":[1,3,5]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"3"}}
+{"doc":{"producer":"Ferrari","model":"F8 Spider","picture":"ferrari-f8-spider.jpg","production_year":2021,"colors":["yellow"],"service_ids":[7,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"4"}}
+{"doc":{"producer":"Ferrari","model":"296 GTB","picture":"ferrari-296-gtb.jpg","production_year":2021,"colors":["black","yellow"],"service_ids":[1,2,5,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"5"}}
+{"doc":{"producer":"Ferrari","model":"250 GT California","picture":"ferrari-250-gt-california.jpg","production_year":1961,"colors":["blue"],"service_ids":[1,4,5]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"6"}}
+{"doc":{"producer":"Ferrari","model":"Testarossa","picture":"ferrari-testarossa.jpg","production_year":1988,"colors":["red"],"service_ids":[5,6,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"7"}}
+{"doc":{"producer":"Lamborghini","model":"Huracán","picture":"lamborghini-huracan.jpg","production_year":2021,"colors":["green"],"service_ids":[1,2,3,4,5,6,7,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"8"}}
+{"doc":{"producer":"Lamborghini","model":"SC20","picture":"lamborghini-sc20.jpg","production_year":2020,"colors":["white","black","blue"],"service_ids":[8,5,4]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"9"}}
+{"doc":{"producer":"Lamborghini","model":"Aventador","picture":"lamborghini-aventador.jpg","production_year":2021,"colors":["black","red"],"service_ids":[6,1,4,7,3]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"10"}}
+{"doc":{"producer":"Lamborghini","model":"Diablo","picture":"lamborghini-diablo.jpg","production_year":1990,"colors":["yellow"],"service_ids":[5,4,7,1]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"11"}}
+{"doc":{"producer":"Lamborghini","model":"Countach","picture":"lamborghini-countach.jpg","production_year":1980,"colors":["white"],"service_ids":[3,8,2]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"12"}}
+{"doc":{"producer":"Lamborghini","model":"Murciélago LP670","picture":"lamborghini-murcielago-lp670.jpg","production_year":2007,"colors":["orange"],"service_ids":[7,3,2,5,1,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"13"}}
+{"doc":{"producer":"Porshe","model":"911 SWB","picture":"porshe-911-swb.jpg","production_year":1968,"colors":["orange"],"service_ids":[6,4,3,2,7,5]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"14"}}
+{"doc":{"producer":"Porshe","model":"911 Turbo S","picture":"porshe-911-turbo-s.jpg","production_year":2021,"colors":["green"],"service_ids":[6,2]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"15"}}
+{"doc":{"producer":"Porshe","model":"911 GTS","picture":"porshe-911-gts.jpg","production_year":2017,"colors":["silver"],"service_ids":[6]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"16"}}
+{"doc":{"producer":"Porshe","model":"Macan","picture":"porshe-macan.jpg","production_year":2021,"colors":["black"],"service_ids":[5,2,3]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"17"}}
+{"doc":{"producer":"McLaren","model":"570S","picture":"mclaren-570s.jpg","production_year":2021,"colors":["orange","black"],"service_ids":[8,2,7,1]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"18"}}
+{"doc":{"producer":"McLaren","model":"F1","picture":"mclaren-f1.jpg","production_year":1994,"colors":["blue"],"service_ids":[4,3,7,6]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"19"}}
+{"doc":{"producer":"McLaren","model":"720S","picture":"mclaren-720s.jpg","production_year":2018,"colors":["blue","orange","black"],"service_ids":[7,2,1,3]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"20"}}
+{"doc":{"producer":"Aston Martin","model":"DB7 GT","picture":"aston-martin-db7-gt.jpg","production_year":2003,"colors":["silver"],"service_ids":[8,7,6,5,4,3,2,1]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"21"}}
+{"doc":{"producer":"Aston Martin","model":"DB7 Zagato","picture":"aston-martin-db7-zagato.jpg","production_year":2003,"colors":["green"],"service_ids":[1,2,3,8,7,6]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"22"}}
+{"doc":{"producer":"Aston Martin","model":"DB7 Vantage","picture":"aston-martin-db7-vantage.jpg","production_year":2002,"colors":["blue"],"service_ids":[2,3]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"23"}}
+{"doc":{"producer":"Ford","model":"Mustang RTR","picture":"ford-mustang-rtr.jpg","production_year":2019,"colors":["black","green"],"service_ids":[4,5,6,7,3,2]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"24"}}
+{"doc":{"producer":"Ford","model":"Mustang Boss 302","picture":"ford-mustang-boss-302.jpg","production_year":2013,"colors":["yellow","black"],"service_ids":[2,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"25"}}
+{"doc":{"producer":"Ford","model":"GT","picture":"ford-gt.jpg","production_year":2021,"colors":["red","white"],"service_ids":[1]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"26"}}
+{"doc":{"producer":"BMW","model":"i8 Roadster","picture":"bmw-i8-roadster.jpg","production_year":2014,"colors":["silver","black","blue"],"service_ids":[4]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"27"}}
+{"doc":{"producer":"BMW","model":"i8 Roadster","picture":"bmw-i8-roadster-2019.jpg","production_year":2019,"colors":["orange","black"],"service_ids":[5,7,1,2,8,3]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"28"}}
+{"doc":{"producer":"Mercedes-Benz","model":"GT","picture":"mercedes-benz-gt.jpg","production_year":2020,"colors":["red"],"service_ids":[1,5]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"29"}}
+{"doc":{"producer":"Mercedes-Benz","model":"AMG GT Coupé","picture":"mercedes-benz-amg-gt-coupe.jpg","production_year":2020,"colors":["green","black"],"service_ids":[5,1,3,2]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"30"}}
+{"doc":{"producer":"Mercedes-McLaren","model":"SLR 722 Stirling Moss","picture":"mercedes-mclaren-slr-722-stirling-moss.jpg","production_year":2009,"colors":["white","red"],"service_ids":[2,4,6,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"31"}}
+{"doc":{"producer":"Mercedes-Benz","model":"SLS AMG Coupé","picture":"mercedes-benz-sls-amg-coupe.jpg","production_year":2014,"colors":["blue"],"service_ids":[1,3,5]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"32"}}
+{"doc":{"producer":"Mazda","model":"RX-Vision GT3 Concept","picture":"mazda-rx-vision-gt3-concept.jpg","production_year":2020,"colors":["red","black"],"service_ids":[7,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"33"}}
+{"doc":{"producer":"Mazda","model":"MX-5 Miata","picture":"mazda-mx5-miata.jpg","production_year":2016,"colors":["white"],"service_ids":[1,2,5,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"34"}}
+{"doc":{"producer":"Mazda","model":"MX-5 Z-Sport","picture":"mazda-mx5-z-sport.jpg","production_year":2016,"colors":["silver","red"],"service_ids":[1,4,5]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"35"}}
+{"doc":{"producer":"Dodge","model":"Viper GTS","picture":"dodge-viper-gts.jpg","production_year":1997,"colors":["blue","white"],"service_ids":[5,6,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"36"}}
+{"doc":{"producer":"Dodge","model":"Viper SRT10 Roadster","picture":"dodge-viper-srt10-roadster.jpg","production_year":2017,"colors":["yellow","black"],"service_ids":[1,2,3,4,5,6,7,8]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"37"}}
+{"doc":{"producer":"Dodge","model":"Challenger","picture":"dodge-challenger.jpg","production_year":2015,"colors":["green","black"],"service_ids":[8,5,4]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"38"}}
+{"doc":{"producer":"Ferrari","model":"550 Maranello","picture":"ferrari-550-maranello.jpg","production_year":1999,"colors":["blue"],"service_ids":[6,1,4,7,3]},"doc_as_upsert":true}
+{"update":{"_index":"cars","_type":"_doc","_id":"39"}}
+{"doc":{"producer":"Mitsubishi","model":"Lancer Evo X","picture":"mitsubishi-lancer-evo-x.jpg","production_year":2010,"colors":["red","black"],"service_ids":[5,4,7,1]},"doc_as_upsert":true}

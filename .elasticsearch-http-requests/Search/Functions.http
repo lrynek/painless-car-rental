@@ -1,0 +1,61 @@
+POST http://localhost:9200/cars/_search
+Content-Type: application/json
+
+{
+	"_source": true,
+	"explain": false,
+	"from": 0,
+	"size": 3,
+	"query": {
+		"function_score": {
+			"query": {
+				"bool": {
+					"must": [],
+					"must_not": [],
+					"should": [],
+					"filter": []
+				}
+			},
+			"functions": [
+				{
+					"script_score": {
+						"script": "_score"
+					},
+					"weight": 10
+				},
+				{
+					"filter": {
+						"bool": {
+							"must": [
+								{
+									"match": {
+										"producer": "Dodge"
+									}
+								}
+							]
+						}
+					},
+					"weight": 100
+				},
+				{
+					"script_score": {
+						"script": {
+							"source": "\t\t\tif (params.requiredColors.isEmpty()) {\n    \t\t\treturn 0;\n\t\t\t}\n\n\t\t\tif (false === doc['colors'].containsAll(params.requiredColors)) {\n    \t\t\treturn 0;\n\t\t\t}\n\n            def requiredColorsCount = params.requiredColors.size();\n\t\t\tdef sum = params.requiredColors\n\t\t\t\t.collect( requiredColor -> {\n\t\t\t\t\tif (false === doc['colors'].contains(requiredColor)) {\t\n\t\t\t\t\t\treturn 0;\n\t\t\t\t\t}\n\n                    def position = params._source['colors'].indexOf(requiredColor) + 1.0;\n\n\t\t\t\t\treturn (params.maximumColorsPerDocument + 1.0 - position ) \/ params.maximumColorsPerDocument;\n\t\t\t\t})\n\t\t\t\t.sum();\n\n\t\t\treturn sum \/ requiredColorsCount;",
+							"params": {
+								"requiredColors": [],
+								"maximumColorsPerDocument": 3
+							}
+						}
+					},
+					"weight": 50
+				}
+			],
+			"boost_mode": "replace",
+			"score_mode": "sum",
+			"min_score": 0
+		}
+	},
+	"sort": {
+		"_score": "desc"
+	}
+}

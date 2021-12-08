@@ -1,0 +1,24 @@
+POST http://localhost:9200/cars/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [],
+          "must_not": [],
+          "should": [],
+          "filter": []
+        }
+      },
+      "functions": [],
+      "boost_mode": "replace",
+      "score_mode": "sum",
+      "min_score": 0
+    }
+  },
+  "sort": {
+    "_score": "desc"
+  }
+}

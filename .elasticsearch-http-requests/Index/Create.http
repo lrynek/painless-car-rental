@@ -1,0 +1,29 @@
+PUT http://localhost:9200/cars
+Content-Type: application/json
+
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "producer": {
+          "type": "text"
+        },
+        "model": {
+          "type": "text"
+        },
+        "picture": {
+          "type": "text"
+        },
+        "production_year": {
+          "type": "integer"
+        },
+        "colors": {
+          "type": "keyword"
+        },
+        "service_ids": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
