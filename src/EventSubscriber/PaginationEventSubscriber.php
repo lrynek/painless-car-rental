@@ -41,9 +41,9 @@ final class PaginationEventSubscriber implements EventSubscriberInterface
 		}
 
 		$routeParams = $request->attributes->get('_route_params', []);
-		$page = $routeParams[self::PAGE] ?? null;
+		$page = (int)($routeParams[self::PAGE] ?? 0);
 
-		if (null === $page || self::FIRST_PAGE === $page) {
+		if (false === $page > self::FIRST_PAGE) {
 			return;
 		}
 
