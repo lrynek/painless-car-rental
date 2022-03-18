@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/36886649/145262691-59852b28-141a-4d1a-ac9c-73bd1e5b00bf.png)
 
 ## Purpose and constraints
-This is the simple educational project prepared to support my recent presentation during **PHPers Summit 2021** conference and to allow participants to play with Elasticsearch scoring. It is not intended to expose any architectural patterns of the code itself, so please don't stick to the directory structure or the overall code architecture too much 😉.
+This is the simple educational project prepared to support my recent presentation during **PHPers Summit 2021** conference (more recently on **Warszawskie Dni Informatyki** and **4Developers**) and to allow participants to play with Elasticsearch scoring. It is not intended to expose any architectural patterns of the code itself, so please don't stick to the directory structure or the overall code architecture too much 😉.
 
 | [Docplanner Tech](https://docplanner.tech) | [PHPers Summit 2021](https://summit.phpers.pl/pl/) |
 | :---:         |     :---:      |
