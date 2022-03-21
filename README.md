@@ -13,51 +13,51 @@ This is the simple educational project prepared to support my recent presentatio
 
 - [Requirements](#Requirements)
 - [Docker and Docker Compose upgrade](#Docker-and-Docker-Compose-upgrade)
-- [Project setup](#Project setup)
-  - [Quick setup (without Docker cleanup)](#Quick setup (without Docker cleanup))
-  - [Step by step setup](#Step by step setup)
-    - [Clone repository and create directories](#Clone repository and create directories)
-    - [Introduction to docker and docker-compose](#Introduction to docker and docker-compose)
-    - [Docker cleanup (optional)](#Docker cleanup (optional))
-      - [Containers cleanup](#Containers cleanup)
-      - [Networks cleanup](#Networks cleanup)
-      - [Volumes cleanup](#Volumes cleanup)
-      - [Development time cleanup](#Development time cleanup)
-    - [Docker compose project setup](#Docker compose project setup)
-      - [Start services](#Start services)
-      - [Install composer dependencies](#Install composer dependencies)
-    - [Elasticsearch index creation and population](#Elasticsearch index creation and population)
-      - [Make scripts executable](#Make scripts executable)
-      - [Quick setup with init.sh](#Quick setup with init.sh)
-      - [Step by step setup with request.sh](#Step by step setup with request.sh)
-        - [Create index](#Create index)
-        - [Populate index with data](#Populate index with data)
-        - [Get count of items](#Get count of items)
+- [Project setup](#Project-setup)
+  - [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker-cleanup))
+  - [Step by step setup](#Step-by-step-setup)
+    - [Clone repository and create directories](#Clone-repository-and-create-directories)
+    - [Introduction to docker and docker-compose](#Introduction-to-docker-and-docker-compose)
+    - [Docker cleanup (optional)](#Docker-cleanup-(optional))
+      - [Containers cleanup](#Containers-cleanup)
+      - [Networks cleanup](#Networks-cleanup)
+      - [Volumes cleanup](#Volumes-cleanup)
+      - [Development time cleanup](#Development-time-cleanup)
+    - [Docker compose project setup](#Docker-compose-project-setup)
+      - [Start services](#Start-services)
+      - [Install composer dependencies](#Install-composer-dependencies)
+    - [Elasticsearch index creation and population](#Elasticsearch-index-creation-and-population)
+      - [Make scripts executable](#Make-scripts-executable)
+      - [Quick setup with init.sh](#Quick-setup-with-init.sh)
+      - [Step by step setup with request.sh](#Step-by-step-setup-with-request.sh)
+        - [Create index](#Create-index)
+        - [Populate index with data](#Populate-index-with-data)
+        - [Get count of items](#Get-count-of-items)
         - [Search](#Search)
-        - [Delete index](#Delete index)
-      - [Step by step other methods](#Step by step other methods)
-- [How to play with it?](#How to play with it?)
+        - [Delete index](#Delete-index)
+      - [Step by step other methods](#Step-by-step-other-methods)
+- [How to play with it?](#How-to-play-with-it?)
   - [Docker](#Docker)
-    - [Run all services](#Run all services)
-    - [Release the shell lock](#Release the shell lock)
-    - [Run all services without shell locking](#Run all services without shell locking)
-    - [Run a specific profile](#Run a specific profile)
-    - [Stop services](#Stop services)
-    - [Remove service containers](#Remove service containers)
-    - [Stop & remove service containers with their network](#Stop & remove service containers with their network)
-    - [Run, Stop, Remove](#Run, Stop, Remove)
-    - [Build images](#Build images)
+    - [Run all services](#Run-all-services)
+    - [Release the shell lock](#Release-the-shell-lock)
+    - [Run all services without shell locking](#Run-all-services-without-shell-locking)
+    - [Run a specific profile](#Run-a-specific-profile)
+    - [Stop services](#Stop-services)
+    - [Remove service containers](#Remove-service-containers)
+    - [Stop & remove service containers with their network](#Stop-&-remove-service-containers-with-their-network)
+    - [Run, Stop, Remove](#Run,-Stop,-Remove)
+    - [Build images](#Build-images)
     - [Composer](#Composer)
     - [Monitoring](#Monitoring)
     - [Reinstallation](#Reinstallation)
   - [Elasticsearch](#Elasticsearch)
     - [Reinitialize](#Reinitialize)
-    - [Elasticsearch code](#Elasticsearch code)
+    - [Elasticsearch code](#Elasticsearch-code)
 - [Uninstallation](#Uninstallation)
 - [Credits](#Credits)
 - [Copyrights](#Copyrights)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Requirements
 
@@ -65,7 +65,7 @@ This is the simple educational project prepared to support my recent presentatio
 - docker-compose (tested on v2.3.3)
 - linux (tested on Ubuntu 18.04)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Docker and Docker Compose upgrade
 
@@ -203,7 +203,7 @@ docker ps -a --format '{{.Image}} {{.Status}} {{.Ports}}'
 | carrental_php:8.1.3-fpm-buster | Up 9 minutes           | 9000/tcp                                            |
 | carrental_elasticsearch:7.17.1 | Up 9 minutes (healthy) | 0.0.0.0:9200->9200/tcp, :::9200->9200/tcp, 9300/tcp |
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Quick setup (without Docker cleanup)
 
@@ -304,11 +304,11 @@ docker ps -a --format '{{.Image}} {{.Status}} {{.Ports}}'
 4. Open your browser and go to:
    http://localhost:9090
    
-4. Read the section [How to play with it?](#How to play with it?)
+4. Read the section [How to play with it?](#How-to-play-with-it?)
 
 5. Read about the project structure in [./docker/service/README.md](./docker/service/README.md)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Step by step setup
 
@@ -412,7 +412,7 @@ sudo chmod -v -R ug=rwX,o=rX \
 ```
 
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Introduction to docker and docker-compose
 
@@ -486,7 +486,7 @@ correct:
 docker-compose --profile dev up --build
 ```
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Docker cleanup (optional)
 
@@ -503,7 +503,7 @@ that is important (ie a container(s) handling an incoming traffic or saving a ba
 
 **Running** the **Docker cleanup** section commands **is optional** but should give you a clean starting point and lack of confusion by having  only the containers and networks that are related to this project.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Containers cleanup
 
@@ -551,7 +551,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 should show no containers (despite their state: created, stopped, running, exited etc.)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Networks cleanup
 
@@ -586,13 +586,13 @@ efff0416acdb   none      null      local
 
 should show that there are no other networks than the default ones.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Volumes cleanup
 
 This application does not make any use of volumes (besides the ones that are defined by the images' Dockerfiles). Therefore it is not needed nor recommended to do a cleanup of them for the purpose of running this application.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Development time cleanup
 
@@ -602,7 +602,7 @@ Once you start working with this application and modify it, stop,  remove, build
 
 In such case, you may find useful 
 
-Following steps from [Run, Stop, Remove](#Run, Stop, Remove) to run and do all cleanup after shutting the application down.
+Following steps from [Run, Stop, Remove](#Run,-Stop,-Remove) to run and do all cleanup after shutting the application down.
 
 or using this command:
 
@@ -628,7 +628,7 @@ The terminal output is pretty self explanatory however if you would like to chec
 - [docker container prune](https://docs.docker.com/engine/reference/commandline/container_prune/)
 - [docker network prune](https://docs.docker.com/engine/reference/commandline/network_prune/)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Docker compose project setup
 
@@ -640,7 +640,7 @@ If you run these commands with `sudo` then the user id will be 0 as well as the 
 
 You will have no benefit of running the commands with `sudo` but only will degrade security and make setting access permissions for user, group and others pointless.
 
-If you have any problems running docker commands without `sudo` then you need to add your user to the docker group, read about that in the [Quick setup (without Docker cleanup)](#Quick setup (without Docker cleanup)) section.
+If you have any problems running docker commands without `sudo` then you need to add your user to the docker group, read about that in the [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker-cleanup)) section.
 
 run:
 
@@ -697,7 +697,7 @@ that should show containers and their resources usage.
 
 If you have opened the second terminal window, go back to the first terminal window and continue with instructions:
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Install composer dependencies
 
@@ -720,7 +720,7 @@ Executing script assets:install public [OK]
 
 At this moment the PHP application is set but there is still missing:
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Elasticsearch index creation and population
 
@@ -740,7 +740,7 @@ terminal output:
 
 so your user and his group are able to execute that script.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 **Make `init.sh` script executable**
 
@@ -756,7 +756,7 @@ terminal output:
 
 so your user and his group are able to execute that script.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 **There are at least three ways to create Elasticsearch's index and populate it**
 
@@ -764,7 +764,7 @@ so your user and his group are able to execute that script.
 - Step by step with `request.sh` - provides more fun.
 - Step by step other methods (require manual edit of file(s))
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Quick setup with init.sh
 
@@ -786,7 +786,7 @@ Done!
 
 That's it. Open your bowser and visit http://localhost:9090/ 
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Step by step setup with request.sh
 
@@ -805,7 +805,7 @@ Performing cURL request:
 Success.
 ```
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ##### Populate index with data
 
@@ -827,7 +827,7 @@ curl -sSL -X POST -H 'Content-Type: application/x-ndjson' --data-raw \
 Success.
 ```
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ##### Get count of items
 
@@ -844,7 +844,7 @@ curl -sSL -X GET 'http://elasticsearch-v7:9200/cars/_count'
 Success.
 ```
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ##### Search
 
@@ -869,9 +869,9 @@ Success.
 
 That's it. Open your bowser and visit http://localhost:9090/  and
 
-Read the section [How to play with it?](#How to play with it?).
+Read the section [How to play with it?](#How-to-play-with-it?).
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ##### Delete index
 
@@ -890,7 +890,7 @@ Success.
 
 Terminal may print `FAIL!` in case there was no index to delete (you deleted it before, or did not create).
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Step by step other methods
 
@@ -929,7 +929,7 @@ Therefore if you want to do them manually but from a docker container you have t
 
 Open your bowser and visit http://localhost:9090/ 
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## How to play with it?
 
@@ -937,11 +937,11 @@ Read about the project structure in [./docker/service/README.md](./docker/servic
 
 or continue with the content as below:
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Docker
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 
 
@@ -969,7 +969,7 @@ carrental-php-fpm-v8-1        | [17-Mar-2022 15:08:41] NOTICE: ready to handle c
 carrental-elasticsearch-v7-1  | {"type": "server", "timestamp": "2022-03-17T15:08:42,246Z"
 ```
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ##### Release the shell lock
 
@@ -987,7 +987,7 @@ The <kbd>Ctrl</kbd>+<kbd>c</kbd> stops all of the containers created by `docker-
 
 and gives the shell control back to you.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Run all services without shell locking
 
@@ -1025,11 +1025,11 @@ When running `docker-compose` `up` with `--detach` key combination <kbd>Ctrl</kb
 
 To address that issue check commands from sections as below:
 
-- [Stop services](#Stop services) (equivalent of <kbd>Ctrl</kbd>+<kbd>c</kbd>)
-- [Remove service containers](#Remove service containers)
-- [Stop & remove service containers with their network](#Stop & remove service containers with their network) 
+- [Stop services](#Stop-services) (equivalent of <kbd>Ctrl</kbd>+<kbd>c</kbd>)
+- [Remove service containers](#Remove-service-containers)
+- [Stop & remove service containers with their network](#Stop-&-remove-service-containers-with-their-network) 
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Run a specific profile
 
@@ -1037,7 +1037,7 @@ Services and profiles that they are assigned to are listed in [./docker/service/
 
 
 
-This section assumes you have created containers by steps from [Run all services](#Run all services) and stopped them as  described in: [Release the shell lock](#Release the shell lock).
+This section assumes you have created containers by steps from [Run all services](#Run-all-services) and stopped them as  described in: [Release the shell lock](#Release-the-shell-lock).
 
 If you want to run a specific profile you know that you need to specify `--profile` option followed by the profile name.
 
@@ -1091,7 +1091,7 @@ Terminal output:
 ⠿ Container carrental-php-fpm-v8-1        Stopped
 ```
 
-In order to have running only `carrental-php-composer-v2-1` [Remove service containers](#Remove service containers) 
+In order to have running only `carrental-php-composer-v2-1` [Remove service containers](#Remove-service-containers) 
 
 and run profile `cli` again:
 
@@ -1130,13 +1130,13 @@ All profiles that you may choose from are defined in the [_profiles.yaml](./dock
 
 Documentation: [Using profiles with Compose](https://docs.docker.com/compose/profiles/)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Stop services
 
 It makes sense to use it only if you plan to restart these containers later.
 
-If your intention is to remove services then use command provided in [Remove service containers](#Remove service containers) that may stop containers as well before removing them or use [Stop & remove service containers with their network](#Stop & remove service containers with their network) that is able to do the same plus networks removal.
+If your intention is to remove services then use command provided in [Remove service containers](#Remove-service-containers) that may stop containers as well before removing them or use [Stop & remove service containers with their network](#Stop-&-remove-service-containers-with-their-network) that is able to do the same plus networks removal.
 
 If you want to only stop docker containers that were started by
 
@@ -1164,7 +1164,7 @@ Example terminal output:
 ⠿ Container carrental-php-fpm-v8-1        Stopped
 ```
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Remove service containers
 
@@ -1199,11 +1199,11 @@ Going to remove carrental-nginx-v1-1, carrental-elasticsearch-v7-1, carrental-ph
 
 If you want to remove also networks then look at: [Stop & remove service containers with their network](#Stop & remove service containers with their network)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Stop & remove service containers with their network
 
-[Remove service containers](#Remove service containers) only removes containers but what if you need to get rid of all of the containers with their networks for eg. you reconfigured network and want to do `docker-compose` `up` with the new network configuration?
+[Remove service containers](#Remove-service-containers) only removes containers but what if you need to get rid of all of the containers with their networks for eg. you reconfigured network and want to do `docker-compose` `up` with the new network configuration?
 
 You may use for that `docker-compose` `down` that is the opposite command to the `docker-compose` `up`, run:
 
@@ -1234,9 +1234,9 @@ Note that networks:
  ⠿ Network carrental_frontend              Removed 0.2s
 ```
 
-were also removed in contrary to the [Remove service containers](#Remove service containers) that removes only services.
+were also removed in contrary to the [Remove service containers](#Remove-service-containers) that removes only services.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Run, Stop, Remove
 
@@ -1293,7 +1293,7 @@ Explanation:
 
 **Point 5**: To repeat that command use <kbd>Ctrl</kbd>+<kbd>Up Arrow</kbd>. Once it is displayed press <kbd>Enter</kbd>.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Build images
 
@@ -1326,10 +1326,10 @@ If the column has a hash value like: `26d6a19a43ba` instead of a container name 
 In such case you may need to:
 
 - Check if a new Dockerfile has any errors and if it was successfully build and tagged
-- Follow steps from [Run, Stop, Remove](#Run, Stop, Remove)
-- Follow steps from [Development time cleanup](#Development time cleanup)
+- Follow steps from [Run, Stop, Remove](#Run,-Stop,-Remove)
+- Follow steps from [Development time cleanup](#Development-time-cleanup)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Composer
 
@@ -1370,7 +1370,7 @@ that will exit the container but since its restart policy is:
 
 then it will be restarted, allowing you to attach to it again.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Monitoring
 
@@ -1400,15 +1400,15 @@ To list images releated to this project run:
 docker image ls 'carrental_*'
 ```
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Reinstallation
 
-At any point of time you may run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#Quick setup (without Docker cleanup)).
+At any point of time you may run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker cleanup)).
 
 You may do that for example to change the project's files and directories ownership to a different user. If you want to do that just switch to the user that should own that project and perform the `./setup.sh` again.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Uninstallation
 
@@ -1464,7 +1464,7 @@ docker image rm -f carrental_php:8.1.3-fpm-buster
 
 Remove the project directory with its files (you should not need `sudo` for this)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Elasticsearch
 
@@ -1500,15 +1500,15 @@ Done!
 
 or you may do it step by step:
 
-- [Delete index](#Delete index)
-- [Create index](#Create index)
-- [Populate index with data](#Populate index with data)
+- [Delete index](#Delete-index)
+- [Create index](#Create-index)
+- [Populate index with data](#Populate-index-with-data)
 
-An alternative way is to run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#Quick setup (without Docker cleanup))
+An alternative way is to run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker-cleanup))
 
-You may use also: [Step by step other methods](#Step by step other methods)
+You may use also: [Step by step other methods](#Step-by-step-other-methods)
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 #### Elasticsearch code
 
@@ -1550,7 +1550,7 @@ final class RecommendedSorter implements FactorSorterInterface
 
 💡 In order to get rid of customly ranked results on the listing you can switch to `DefaultSorter` that sorts all results ascending by their `id`.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Credits
 
@@ -1560,11 +1560,11 @@ final class RecommendedSorter implements FactorSorterInterface
 - Setup and initialization scripts
 - Docker and docker-compose related manuals
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
 ## Copyrights
 
 Apart from [the project's LICENSE](https://github.com/lrynek/phpers-2021/blob/main/LICENSE), [all car photo samples](https://github.com/lrynek/phpers-2021/tree/main/public/images/cars) used in the project are taken from Google search results and all copyrights applies to their respective authors and shouldn't be used further than private/educational use without their explicit consent.
 
- [^TOC^](#Table of contents)
+ [^TOC^](#Table-of-contents)
 
