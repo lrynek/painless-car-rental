@@ -12,7 +12,7 @@ This is the simple educational project prepared to support my recent presentatio
 ### Table of contents
 
 - [Requirements](#Requirements)
-- [Docker and Docker Compose upgrade](#Docker and Docker Compose upgrade)
+- [Docker and Docker Compose upgrade](#Docker-and-Docker-Compose-upgrade)
 - [Project setup](#Project setup)
   - [Quick setup (without Docker cleanup)](#Quick setup (without Docker cleanup))
   - [Step by step setup](#Step by step setup)
