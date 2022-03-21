@@ -1,16 +1,16 @@
 ## Table of contents
 
-- [Project structure](#Project structure)
-- [Projects context](#Projects context)
-  - [Specific to this application context](#Specific to this application context)
-  - [Generic service module context](#Generic service module context)
-    - [Copy a service module to any other project](#Copy a service module to any other project)
-    - [List of services modules](#List of services modules)
-    - [Service module volumes](#Service module volumes)
-    - [Service module variables](#Service module variables)
-    - [Service module volume has an application and module context](#Service module volume has an application and module context)
-  - [Merging two contexts](#Merging two contexts ) 
-- [Health checks](#Health checks)
+- [Project structure](#Project-structure)
+- [Projects context](#Projects-context)
+  - [Specific to this application context](#Specific-to-this-application context)
+  - [Generic service module context](#Generic-service-module-context)
+    - [Copy a service module to any other project](#Copy-a-service-module-to-any-other-project)
+    - [List of services modules](#List-of-services modules)
+    - [Service module volumes](#Service-module-volumes)
+    - [Service module variables](#Service-module-variables)
+    - [Service module volume has an application and module context](#Service-module-volume-has-an-application-and-module-context)
+  - [Merging two contexts](#Merging-two-contexts) 
+- [Health checks](#Health-checks)
   - [Nginx](#Nginx)
   - [Elasticsearch](#Elasticsearch)
 - [Security](#Security)
@@ -18,11 +18,11 @@
   - [Capabilities](#Capabilities)
   - [Network](#Network)
   - [Firewall](#Firewall)
-  - [Vulnerability scan](#Vulnerability scan)
-- [Known Issues](#Known Issues)
+  - [Vulnerability scan](#Vulnerability-scan)
+- [Known Issues](#Known-Issues)
 - Typical errors and their reasons
-  - [Nginx page is loading forever](#Nginx page is loading forever)
-  - [Elasticsearch exits with code 125](#Elasticsearch exits with code 125)
+  - [Nginx page is loading forever](#Nginx-page-is-loading-forever)
+  - [Elasticsearch exits with code 125](#Elasticsearch-exits-with-code-125)
 
 
 
@@ -30,7 +30,7 @@
 
 There is a [dirlist.txt](./dirlist.txt) that shows all of the files.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ## Projects context
 
@@ -39,7 +39,7 @@ There are two contexts in this project:
 - Specific to this application context
 - Generic service module context
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ### Specific to this application context
 
@@ -98,7 +98,7 @@ If you want to copy elasticsearch-v7 module to your application then remember to
 
 Currently docker does not support paths relative other than relative to the main docker-compose.yaml file therefore it would make a confusion if `elasticsearch-v7.yaml` file were put inside `elasticsearch-v7` directory and still need to use a path that is a relative to the `docker/service` dir.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 #### List of services modules
 
@@ -119,7 +119,7 @@ The reason is that for example `elasticsearch-v7` has the suffix `v7` so if curr
 
 An additional benefit of that suffix is that you may have at the same project `elasticsearch-v7` and `elasticsearch-v8` without any conflicts and upgrade or downgrade them as you wish.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 #### Service module volumes
 
@@ -190,7 +190,7 @@ makes as any other service module use of variables:
 - `${service_path:-.}` - defaults to the current directory `docker/service` but may be changed in the [.env](./.env) file. This is the path where docker-compose will look for the dir's of service modules for building them as well as for their dedictated env files.
 - `user: ${uid:-1000}:${gid:-1000}` defines the user id and group id of the user that runs the image. For the images that have their own custom Dockerfile like [php-composer-v2/image/Dockerfile](./php-composer-v2/image/Dockerfile) the user id and group id is used for the image build.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 #### Service module volume has an application and module context
 
@@ -203,7 +203,7 @@ Since they define both source (HOST) and destination (Container) mount points yo
 
 Because some of the services need volumes or bind points for their basic operation (persistent storage for databases) and their paths differ for every service then a decision was made to put volumes inside the service module so if you copy it to another project then you will always have the bare minimum paths on the service side defined and will need to adjust the host side to your needs. That seems to be more reasonable then searching over all of your projects where a particular service was used in order to acquire a knowledge about required paths for its persistence.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ### Merging two contexts 
 
@@ -247,7 +247,7 @@ If Elasticsearch is in multi node mode then the health check's status may be `gr
 
 Current health check implementation returns status healthy in case either `green` or `yellow`.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 
 ## Security
@@ -258,7 +258,7 @@ Do not run these containers as `root`, there was a significant effort done in or
 
 However if for any reason you want to run this application as a `root` then all you need is to call `setup.sh` script with `sudo` in front of it.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ### Capabilities
 
@@ -270,26 +270,26 @@ If you are going do develop your application then play with these values as desc
 
 For some of the services adding limitations of the capabilities is a piece of cake. Try it!
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ### Network
 
 For your convenience the `elasticsearch-v7` service is available under the host's `localhost`. When releasing this application to the public domain, remember about disabling that by making the `backend` network internal in [_network.yaml](./_network.yaml)
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 #### Firewall
 
 It would not hurt to use a firewall for the services. You may use UFW or IPTables to limit the exposure of the services since if an image exposes any port it is currently not supported by docker to override that with your own Dockerfile and disable a port exposure.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 
 ### Vulnerability scan
 
 It is complety up to you to do it. No scan was made. 
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ## Known Issues
 
@@ -297,7 +297,7 @@ It is complety up to you to do it. No scan was made.
 
 `-` or `.` is not allowed for the variable value, workaround to put value between a single quote `'` or double quote `"` results in passing that variable with the quotes (not just with the content between them).
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ## Typical errors and their reasons
 
@@ -324,7 +324,7 @@ cap_add:
  - CAP_SETUID
 ```
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ### Elasticsearch exits with code 125
 
@@ -332,4 +332,4 @@ cap_add:
 
 Elasticsearch don't have enough permissions to access its files.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
