@@ -2,7 +2,7 @@
 
 - [Project structure](#Project-structure)
 - [Projects context](#Projects-context)
-  - [Specific to this application context](#Specific-to-this-application context)
+  - [Specific to this application context](#Specific-to-this-application-context)
   - [Generic service module context](#Generic-service-module-context)
     - [Copy a service module to any other project](#Copy-a-service-module-to-any-other-project)
     - [List of services modules](#List-of-services modules)
