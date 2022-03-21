@@ -1,0 +1,111 @@
+version: "3.7"
+
+services:
+  elasticsearch-v7:
+
+    # https://docs.docker.com/compose/reference/envvars/
+
+    # The image key makes use of the ${COMPOSE_PROJECT_NAME} var
+    # defined in the .env file so this provides consistent naming
+    # of the images stored at your machine and allows to list
+    # only these images that are related to this project by
+    # docker image ls | grep 'carrental_'
+    #
+    image: ${COMPOSE_PROJECT_NAME}_elasticsearch:7.17.1
+    
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#build
+    
+    build:
+
+      # Context is the place where docker-compose may find Dockerfile
+      # note that there is also .dockerignore that lists paths that
+      # should not be loaded by the build command into memory when
+      # building the image from the Dockerfile.
+      # If there are big files there (logs, database data)
+      # you may fail building the image because of running out of the RAM
+      # Sending files to RAM as the build context is only required
+      # if you want to use these files inside image for eg. by COPY command
+      #
+      context: ${service_path:-.}/elasticsearch-v7/${image_path}
+      args:
+
+        # https://docs.docker.com/engine/reference/builder/#arg
+
+        # The Elasticsearch Dockerfile has ARG image
+        # that consumes the value from here for the build.
+        #
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.1@sha256:35f81ab02dda48d6f81ad9be52b25cdbd3a832e8660b48218af805d6de3ddba8
+      
+      shm_size: '2gb'
+
+      # https://docs.docker.com/develop/develop-images/multistage-build/
+
+      target: dev
+    
+    #BUGFIX - docker-compose does not support variables with dot (.) or underscore (_) in name or as a values in the .env files - these values must be defined here
+    environment:
+      - discovery.type=single-node
+      - node.name=elasticsearch
+      - include_type_name=true
+
+    # Points to blank .env.dev file due to the #BUGFIX as above.
+    #
+    env_file:
+      - "${service_path:-.}/elasticsearch-v7/${image_path}/.env.dev"
+
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck
+
+    # You may override here the healthcheck periods defined in the Dockerfie
+    # typically it takes around 30 seconds for Elasticsearch to start so
+    # the start period should be at least that or more in case of using any
+    # plugins or having a lot of data.
+    #
+    # healthcheck:
+    #   start_period: 1m
+    #   interval: 2s
+    #   timeout: 3s
+    #   retries: 3
+
+    # As per documentation Elastisearch is running by default as user 1000 and group 0
+    # You should be fine using your own user id with a fallback to 1000 in case you did not populate uid variable
+    # but at least the Elasticsearch's user should have group 0 or be added to the 0 group
+    # Not setting the user:group id here correctly usually results in Elasticserach exiting with the code 125
+    #
+    user: ${uid:-1000}:0
+
+    #TODO - make your capabilities restrictions for that service
+    # take nginx-v1 service as an example and check if you may
+    # limit the capabilities even further.
+    # who knows, maybe you may grant zero capabilities and this
+    # service will still work without any problem?
+    # Take that seriously and look above at the user: ${uid:-1000}:0
+    # that means Elasticsearch has the grup id = 0 (admin)
+    # Should that user be able to use all capabilities? Probably not.
+    #
+    # cap_drop:
+    #   - ALL
+
+    # cap_add:
+
+
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
+
+    # Note the subtitution to dot (.) in case var service_path is not set
+    # then path will be relative to docker-compose.yaml: ./elasticsearch-v7/...
+    # instead of absolute: /elasticsearch-v7/...
+    # Below are short form volumes (bind mounts specifically) that in case of 
+    # missing directory at the HOST machine create that dir with the root access rights.
+    # Therefore it is important to remove the possibility for docker engine to mess
+    # with your HOST system files by creating any directories that are starting from the root (/) path.
+    # With substitution to dot (.) paths will always be relative to the docker-compose.yaml
+    # unless you set service_path to an absolute path (starting from /)
+    # You may turn off this auto directory creation by using long form bind mounts
+    # that access only already existing directories at HOST and don't create new ones.
+    # Note that data and logs are read and write (:rw) access for the container but config and plugin
+    # are read only (:ro) because there is no need for the container to save into them but just read them.
+    #
+    volumes:
+      - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/data:/usr/share/elasticsearch/data:rw
+      - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/logs/:/usr/share/elasticsearch/logs/:rw
+      - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/config/:/usr/share/elasticsearch/config/:ro
+      - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/plugins/:/usr/share/elasticsearch/plugins/:ro

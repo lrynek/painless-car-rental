@@ -1,0 +1,52 @@
+version: "3.7"
+
+# https://docs.docker.com/compose/compose-file/compose-file-v3/#profiles
+
+# If you start a single profile for eg. cli
+#
+# docker-compose --profile cli up --build
+#
+# but you see that besides cli (composer) many 
+# other conainers are also runnig then you need to 
+# stop all of the containers [Ctrl]+[c] or:
+#
+# docker-compose stop
+#
+# and run: 
+#
+# docker-compose down --remove-orphans
+#
+# to remove them before runing that cli profile
+# If you run:
+#
+# docker ps -a
+#
+# and don't see any containers then running
+#
+# docker-compose --profile cli up --build
+#
+# should make only the cli profile (composer) running.
+
+services:
+  nginx-v1:
+    profiles: 
+      - dev
+      - prod
+      - web
+
+  php-fpm-v8:
+    profiles:
+      - dev
+      - prod
+      - web
+
+  elasticsearch-v7:
+    profiles:
+      - dev
+      - prod
+      - db
+
+  php-composer-v2:
+    profiles: 
+      - dev
+      - cli

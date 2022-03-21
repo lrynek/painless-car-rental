@@ -1,0 +1,52 @@
+version: "3.7"
+
+# https://docs.docker.com/compose/compose-file/compose-file-v3/#network-configuration-reference
+# https://docs.docker.com/compose/compose-file/compose-file-v3/#internal
+
+# Note that only nginx-v1 is connected to the frontend and 
+# backend network.
+# All other services are connected to the backend network only.
+# Backend network is set as internal, therefore Nginx service 
+# is the only entry point for the incoming requests.
+
+services:
+  nginx-v1:
+    ports:
+      - "9090:80"
+    networks: 
+      - frontend
+      - backend
+
+  php-fpm-v8:
+    environment:
+
+      # Env is here because it is specific to this project but not to the php-fpm service in general.
+      # also you have here defined networking therefore creation of env that will hold url shows you
+      # interconnection that happens in the networks.
+      #
+      - "DOCKER_ELASTICSEARCH_HOST=http://elasticsearch-v7:9200"
+
+    networks:
+      - backend
+  elasticsearch-v7:
+  # potentially redundant - no need to specify
+    networks: 
+      - backend
+    ports:
+      - 9200:9200
+
+  php-composer-v2:
+    environment:
+
+      # Composer needs Elasticsearch host for sending requests by init.sh and request.sh
+      #
+      - "DOCKER_ELASTICSEARCH_HOST=http://elasticsearch-v7:9200"
+
+    networks: 
+      - backend
+
+networks:
+  frontend:
+    internal: false
+  backend:
+    internal: false # change to true if you don't want that network to be accesible from the HOST

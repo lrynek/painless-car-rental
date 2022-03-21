@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  php-composer-v2:
+    image: ${COMPOSE_PROJECT_NAME}_composer:2.2.7
+    build: 
+      context: ${service_path:-.}/php-composer-v2/${image_path}
+      args:
+        image: composer:2.2.7
+        uid: ${uid:-1000}
+        gid: ${gid:-1000}
+      shm_size: '2gb'
+      target: dev
+
+    env_file: 
+      - "${service_path:-.}/php-composer-v2/.env.dev"
+    
+    user: ${uid:-1000}:${gid:-1000}
+
+    # makes possible to attach to the container shell and perform actions
+    # for example install dependencies
+    #
+    # docker attach carrental-php-composer-v2-1
+    #
+    # once you do what you wanted to do just
+    # type exit + [enter] to leave the container shell
+    #
+    stdin_open: true
+    tty: true
+
+    #TODO - make your capabilities restrictions for that service
+    # take nginx-v1 service as an example and check if you may
+    # limit the capabilities even further.
+    # Keep in mind that composer may execute installation scripts
+    # that potentially may be harmful.
+    # Does composer container really need all capabilities including
+    # these with the low level kernell commands? No it does not!
+
+    # cap_drop:
+    #   - ALL
+
+    # cap_add:
+
+    working_dir: /app/default
+
+    volumes:
+      - ${app_path:-./app}:/app

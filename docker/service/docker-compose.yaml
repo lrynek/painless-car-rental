@@ -1,0 +1,9 @@
+version: "3.7"
+
+#TODO use variables instead of ./app dir for volumes perhaps save it in
+#TODO use ulimits https://youtu.be/PWUuyDrqvt0?t=199
+#TODO move volumes to separate files
+
+# this is good place for anchors that you later may use a substitution for aliases
+
+#TODO https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
