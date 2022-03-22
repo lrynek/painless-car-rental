@@ -6,8 +6,7 @@ version: "3.7"
 # Note that only nginx-v1 is connected to the frontend and 
 # backend network.
 # All other services are connected to the backend network only.
-# Backend network is set as internal, therefore Nginx service 
-# is the only entry point for the incoming requests.
+# Backend network may be set as internal.
 
 services:
   nginx-v1:
