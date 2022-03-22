@@ -14,11 +14,11 @@ This is the simple educational project prepared to support my recent presentatio
 - [Requirements](#Requirements)
 - [Docker and Docker Compose upgrade](#Docker-and-Docker-Compose-upgrade)
 - [Project setup](#Project-setup)
-  - [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker-cleanup))
+  - [Quick setup (without Docker cleanup)](#quick-setup-without-docker-cleanup)
   - [Step by step setup](#Step-by-step-setup)
     - [Clone repository and create directories](#Clone-repository-and-create-directories)
     - [Introduction to docker and docker-compose](#Introduction-to-docker-and-docker-compose)
-    - [Docker cleanup (optional)](#Docker-cleanup-(optional))
+    - [Docker cleanup (optional)](#docker-cleanup-optional)
       - [Containers cleanup](#Containers-cleanup)
       - [Networks cleanup](#Networks-cleanup)
       - [Volumes cleanup](#Volumes-cleanup)
@@ -28,7 +28,7 @@ This is the simple educational project prepared to support my recent presentatio
       - [Install composer dependencies](#Install-composer-dependencies)
     - [Elasticsearch index creation and population](#Elasticsearch-index-creation-and-population)
       - [Make scripts executable](#Make-scripts-executable)
-      - [Quick setup with init.sh](#Quick-setup-with-init.sh)
+      - [Quick setup with init.sh](#quick-setup-with-initsh)
       - [Step by step setup with request.sh](#Step-by-step-setup-with-request.sh)
         - [Create index](#Create-index)
         - [Populate index with data](#Populate-index-with-data)
@@ -36,7 +36,7 @@ This is the simple educational project prepared to support my recent presentatio
         - [Search](#Search)
         - [Delete index](#Delete-index)
       - [Step by step other methods](#Step-by-step-other-methods)
-- [How to play with it?](#How-to-play-with-it?)
+- [How to play with it?](#how-to-play-with-it)
   - [Docker](#Docker)
     - [Run all services](#Run-all-services)
     - [Release the shell lock](#Release-the-shell-lock)
@@ -44,8 +44,8 @@ This is the simple educational project prepared to support my recent presentatio
     - [Run a specific profile](#Run-a-specific-profile)
     - [Stop services](#Stop-services)
     - [Remove service containers](#Remove-service-containers)
-    - [Stop & remove service containers with their network](#Stop-&-remove-service-containers-with-their-network)
-    - [Run, Stop, Remove](#Run,-Stop,-Remove)
+    - [Stop & remove service containers with their network](#stop--remove-service-containers-with-their-network)
+    - [Run, Stop, Remove](#run-stop-remove)
     - [Build images](#Build-images)
     - [Composer](#Composer)
     - [Monitoring](#Monitoring)
@@ -304,7 +304,7 @@ docker ps -a --format '{{.Image}} {{.Status}} {{.Ports}}'
 4. Open your browser and go to:
    http://localhost:9090
    
-4. Read the section [How to play with it?](#How-to-play-with-it?)
+4. Read the section [How to play with it?](#how-to-play-with-it)
 
 5. Read about the project structure in [./docker/service/README.md](./docker/service/README.md)
 
@@ -602,7 +602,7 @@ Once you start working with this application and modify it, stop,  remove, build
 
 In such case, you may find useful 
 
-Following steps from [Run, Stop, Remove](#Run,-Stop,-Remove) to run and do all cleanup after shutting the application down.
+Following steps from [Run, Stop, Remove](#run-stop-remove) to run and do all cleanup after shutting the application down.
 
 or using this command:
 
@@ -640,7 +640,7 @@ If you run these commands with `sudo` then the user id will be 0 as well as the 
 
 You will have no benefit of running the commands with `sudo` but only will degrade security and make setting access permissions for user, group and others pointless.
 
-If you have any problems running docker commands without `sudo` then you need to add your user to the docker group, read about that in the [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker-cleanup)) section.
+If you have any problems running docker commands without `sudo` then you need to add your user to the docker group, read about that in the [Quick setup (without Docker cleanup)](#quick-setup-without-docker-cleanup) section.
 
 run:
 
@@ -869,7 +869,7 @@ Success.
 
 That's it. Open your bowser and visit http://localhost:9090/  and
 
-Read the section [How to play with it?](#How-to-play-with-it?).
+Read the section [How to play with it?](#how-to-play-with-it).
 
  [^TOC^](#Table-of-contents)
 
@@ -1027,7 +1027,7 @@ To address that issue check commands from sections as below:
 
 - [Stop services](#Stop-services) (equivalent of <kbd>Ctrl</kbd>+<kbd>c</kbd>)
 - [Remove service containers](#Remove-service-containers)
-- [Stop & remove service containers with their network](#Stop-&-remove-service-containers-with-their-network) 
+- [Stop & remove service containers with their network](#stop--remove-service-containers-with-their-network) 
 
  [^TOC^](#Table-of-contents)
 
@@ -1136,7 +1136,7 @@ Documentation: [Using profiles with Compose](https://docs.docker.com/compose/pro
 
 It makes sense to use it only if you plan to restart these containers later.
 
-If your intention is to remove services then use command provided in [Remove service containers](#Remove-service-containers) that may stop containers as well before removing them or use [Stop & remove service containers with their network](#Stop-&-remove-service-containers-with-their-network) that is able to do the same plus networks removal.
+If your intention is to remove services then use command provided in [Remove service containers](#Remove-service-containers) that may stop containers as well before removing them or use [Stop & remove service containers with their network](#stop--remove-service-containers-with-their-network) that is able to do the same plus networks removal.
 
 If you want to only stop docker containers that were started by
 
@@ -1197,7 +1197,7 @@ Going to remove carrental-nginx-v1-1, carrental-elasticsearch-v7-1, carrental-ph
  ⠿ Container carrental-php-fpm-v8-1        Removed 0.0s
 ```
 
-If you want to remove also networks then look at: [Stop & remove service containers with their network](#Stop & remove service containers with their network)
+If you want to remove also networks then look at: [Stop & remove service containers with their network](#stop--remove-service-containers-with-their-network)
 
  [^TOC^](#Table-of-contents)
 
@@ -1326,7 +1326,7 @@ If the column has a hash value like: `26d6a19a43ba` instead of a container name 
 In such case you may need to:
 
 - Check if a new Dockerfile has any errors and if it was successfully build and tagged
-- Follow steps from [Run, Stop, Remove](#Run,-Stop,-Remove)
+- Follow steps from [Run, Stop, Remove](#run-stop-remove)
 - Follow steps from [Development time cleanup](#Development-time-cleanup)
 
  [^TOC^](#Table-of-contents)
@@ -1404,7 +1404,7 @@ docker image ls 'carrental_*'
 
 #### Reinstallation
 
-At any point of time you may run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker cleanup)).
+At any point of time you may run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#quick-setup-without-docker-cleanup).
 
 You may do that for example to change the project's files and directories ownership to a different user. If you want to do that just switch to the user that should own that project and perform the `./setup.sh` again.
 
@@ -1504,7 +1504,7 @@ or you may do it step by step:
 - [Create index](#Create-index)
 - [Populate index with data](#Populate-index-with-data)
 
-An alternative way is to run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#Quick-setup-(without-Docker-cleanup))
+An alternative way is to run the `./setup.sh` script again as described in [Quick setup (without Docker cleanup)](#quick-setup-without-docker-cleanup)
 
 You may use also: [Step by step other methods](#Step-by-step-other-methods)
 
