@@ -1,9 +1,18 @@
 version: "3.7"
 
 # Application specific code is in files that start with an underscore, for exmple:
+#
 # _network.yaml
 # _profiles.yaml
 
 # Service specific code is in files without underscore, example:
+#
 # nginx-v1.yaml
 # php-fpm-v8.yaml
+
+# All files are combined by providing their filenames as a value of the
+# variable COMPOSE_FILE, for example:
+#
+# COMPOSE_FILE=_network.yaml:_restart-policy.yaml ...
+#
+# in the .env file
