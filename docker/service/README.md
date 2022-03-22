@@ -79,7 +79,7 @@ All of the services: `nginx-v1`, `php-fpm-v8` and `elasticsearch-v7` may work in
 
 Therefore their dependency is specific for this project and put in a separate file  [_service-dependency.yaml](_service-dependency.yaml) instead of putting the `depends_on` key into each of these service's yaml file.
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ### Generic service module context
 
@@ -223,7 +223,7 @@ removing a file from that variable will result in not having it in the merged ve
 
 However using [_profiles.yaml](./_profiles.yaml) is much more elegant way to have particular services up. Read about: **Run a specific profile** section of the [../../README.md](../../README.md)
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ## Health checks
 
@@ -235,7 +235,7 @@ They are implemented in the services' Dockerfiles
 
 Nginx in the free version don't have any sophisticated health check endpoint therefore a simple one was defined in its [default.conf](./nginx-v1/image/files/etc/nginx/conf.d/default.conf)
 
-[^TOC^](#Table of contents)
+[^TOC^](#Table-of-contents)
 
 ### Elasticsearch
 
