@@ -210,7 +210,7 @@ docker ps -a --format '{{.Image}} {{.Status}} {{.Ports}}'
 1. Clone this repository:
 
    ```sh
-   git clone 'https://github.com/lrynek/painless-car-rental.git'
+   git clone 'https://github.com/212223/painless-car-rental.git'
    ```
 
 3. Change directory:
@@ -319,7 +319,7 @@ docker ps -a --format '{{.Image}} {{.Status}} {{.Ports}}'
 Clone this repository && change dir to it:
 
 ```sh
-git clone 'https://github.com/lrynek/painless-car-rental' && cd painless-car-rental/docker/service
+git clone 'https://github.com/212223/painless-car-rental.git' && cd painless-car-rental/docker/service
 ```
 
 
