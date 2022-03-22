@@ -44,7 +44,7 @@ final class Cars implements \IteratorAggregate, \Countable, PagesTotalAwareInter
 		return $this->total;
 	}
 
-		public function empty(): bool
+	public function empty(): bool
 	{
 		return 0 === $this->count();
 	}

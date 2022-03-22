@@ -3,14 +3,11 @@
 ![image](https://user-images.githubusercontent.com/36886649/145262691-59852b28-141a-4d1a-ac9c-73bd1e5b00bf.png)
 
 ## Purpose and constraints
-This is the simple educational project prepared to support my recent presentation during [**PHPers Summit 2021**](https://2021.summit.phpers.pl/pl/) conference (more recently on [**Warszawskie Dni Informatyki 2022**](https://warszawskiedniinformatyki.pl/en/) and [**4Developers 2022**](https://4developers.org.pl/bio_online_2022/#id=48004)) and to allow participants to play with Elasticsearch scoring. It is not intended to expose any architectural patterns of the code itself, so please don't stick to the directory structure or the overall code architecture too much 😉.
+This is the simple educational project prepared to support my presentation during [**PHPers Summit 2021**](https://2021.summit.phpers.pl/pl/) conference (more recently on [**Warszawskie Dni Informatyki 2022**](https://warszawskiedniinformatyki.pl/en/) and [**4Developers 2022**](https://4developers.org.pl/bio_online_2022/#id=48004)) and to allow participants to play with Elasticsearch scoring. It is not intended to expose any architectural patterns of the code itself, so please don't stick to the directory structure or the overall code architecture too much 😉.
 
 | [Docplanner Tech](https://docplanner.tech) | [PHPers Summit 2021](https://2021.summit.phpers.pl/pl/) | [Warszawskie Dni Informatyki](https://warszawskiedniinformatyki.pl/en/) | [**4Developers**](https://4developers.org.pl/)
 | :---:         |     :---:      |     :---:      |     :---:      |
 | ![image](https://user-images.githubusercontent.com/36886649/135843518-9d4b2ec1-32dc-4226-a63c-b173d9b0706e.png) | ![image](https://user-images.githubusercontent.com/36886649/135534953-338af09d-d2c6-43ee-9407-137253cc4e13.png) | <img width="333" alt="image" src="https://user-images.githubusercontent.com/36886649/159000173-5560813a-2a13-452d-8444-c17d4405140f.png"> | <img width="249" alt="image" src="https://user-images.githubusercontent.com/36886649/159000375-33ef5c35-e39f-4115-a39c-b25674d4655d.png">
-
-
-
 
 ## Requirements
 - PHP 8.0.9

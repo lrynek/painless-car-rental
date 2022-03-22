@@ -7,7 +7,7 @@ final class ProductionYear
 {
 	/** @link https://www.daimler.com/company/tradition/company-history/1885-1886.html */
 	private const MIN = 1886;
-	private const MAX = 2021;
+	private const MAX = 2022;
 
 	public function __construct(
 		private int $value
