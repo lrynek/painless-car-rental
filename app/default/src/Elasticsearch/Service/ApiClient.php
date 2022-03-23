@@ -15,9 +15,9 @@ final class ApiClient implements ApiClientInterface
 
 	private const ENDPOINT_SEARCH = '_search';
 
-	public function __construct(private ClientInterface $client)
+	public function __construct(private ClientInterface $client, string $elasticsearchHost)
 	{
-		$this->elasticsearchHost = getenv('DOCKER_ELASTICSEARCH_HOST');
+		$this->elasticsearchHost = $elasticsearchHost;
 	}
 
 	public function search(Index $index, Query $query): Response
