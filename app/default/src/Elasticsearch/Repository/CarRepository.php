@@ -13,7 +13,6 @@ use App\Repository\CarRepositoryInterface;
 use App\ValueObject\Cars;
 use App\ValueObject\CriteriaInterface;
 use App\ValueObject\Pagination;
-use Psr\Log\LoggerInterface;
 
 final class CarRepository implements CarRepositoryInterface
 {
@@ -21,12 +20,10 @@ final class CarRepository implements CarRepositoryInterface
 
 	public function __construct(
 		private ApiClientInterface    $client,
-		private CarsHydratorInterface $hydrator,
-		LoggerInterface $logger = null
+		private CarsHydratorInterface $hydrator
 	)
 	{
 		$this->index = Index::CARS();
-		$this->logger = $logger;
 	}
 
 	public function find(Pagination $pagination, ?CriteriaInterface $criteria = null): Cars
@@ -36,11 +33,6 @@ final class CarRepository implements CarRepositoryInterface
 
 		$response = $this->client->search($this->index, $query);
 
-		$this->logger->info('Found: [' . count($response->results()) . ']' . ' for query: ' . json_encode($query->toArray()));
-
-		$hydra = $this->hydrator->hydrate($response);
-
-		// var_dump($hydra); die;
-		return $hydra;
+		return $this->hydrator->hydrate($response);
 	}
 }

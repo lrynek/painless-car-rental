@@ -5,14 +5,12 @@ namespace App\ValueObject;
 
 final class PagesTotal
 {
-	private const MIN_PAGE = 4;
+	private const MIN_PAGE = 1;
 
 	private int $value;
 
 	public function __construct(PagesTotalAwareInterface $results, ResultsPerPage $resultsPerPage)
 	{
-		$this->value = (int)floor($results->total() / $resultsPerPage->value());
-
 		if ($resultsPerPage->value() > $results->total()) {
 			$this->value = self::MIN_PAGE;
 		} else {

@@ -13,7 +13,7 @@ final class PageParamConverter extends AbstractParamConverter
 {
 	private const PARAM_PAGE = 'page';
 	private const PAGE_DEFAULT = 1;
-	private const RESULTS_PER_PAGE = 10;
+	private const RESULTS_PER_PAGE = 3;
 
 	public function apply(Request $request, ParamConverter $configuration): bool
 	{

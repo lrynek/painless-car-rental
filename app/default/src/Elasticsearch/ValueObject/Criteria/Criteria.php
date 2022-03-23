@@ -11,11 +11,6 @@ final class Criteria implements CriteriaInterface
 	private array $additional = [];
 	private array $excluded = [];
 
-	public function __toString()
-	{
-		return implode(',', $this->required);
-	}
-
 	public function addRequired(Criterion $criterion): self
 	{
 		$this->required[$criterion::class] = $criterion;

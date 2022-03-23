@@ -15,16 +15,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Psr\Log\LoggerInterface;
 
 final class DefaultController extends AbstractController
 {
 	private const PAGE_DEFAULT = 1;
-
-	public function __construct(LoggerInterface $logger = null)
-	{
-		
-	}
 
 	#[Route('/{page}', name: 'app_search', requirements: ['page' => '\d+'], defaults: ['page' => self::PAGE_DEFAULT])]
 	#[ParamConverter('pagination', class: PageParamConverter::class)]
@@ -34,11 +28,8 @@ final class DefaultController extends AbstractController
 		AdditionalServiceRepositoryInterface $serviceRepository,
 		Pagination                           $pagination,
 		Criteria                             $criteria
-		
 	): Response
 	{
-		// $this->logger = $logger;
-
 		$cars = $carRepository->find($pagination, $criteria);
 
 		$filtersData = [
