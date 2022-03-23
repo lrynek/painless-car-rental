@@ -11,13 +11,13 @@ use Psr\Http\Message\ResponseInterface;
 
 final class ApiClient implements ApiClientInterface
 {
-	private $ELASTICSEARCH_HOST;
+	private $elasticsearchHost;
 
 	private const ENDPOINT_SEARCH = '_search';
 
 	public function __construct(private ClientInterface $client)
 	{
-		$this->ELASTICSEARCH_HOST = getenv('DOCKER_ELASTICSEARCH_HOST');
+		$this->elasticsearchHost = getenv('DOCKER_ELASTICSEARCH_HOST');
 	}
 
 	public function search(Index $index, Query $query): Response
@@ -30,7 +30,7 @@ final class ApiClient implements ApiClientInterface
 
 	private function createEndpointUrl(string $index, string $endpoint): string
 	{
-		return implode(DIRECTORY_SEPARATOR, [$this->ELASTICSEARCH_HOST, $index, $endpoint]);
+		return implode(DIRECTORY_SEPARATOR, [$this->elasticsearchHost, $index, $endpoint]);
 	}
 
 	private function convertResponseToArray(ResponseInterface $response): array
