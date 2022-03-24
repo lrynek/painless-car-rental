@@ -1,0 +1,117 @@
+version: "3.7"
+
+services:
+  nginx-v1:
+    image: ${COMPOSE_PROJECT_NAME}_nginx:1.17.8
+    build: 
+      context: ${service_path:-.}/nginx-v1/${image_path}
+      args:
+        image: nginx:1.17.8
+      shm_size: '2gb'
+      target: dev
+
+    # You may override here the health check periods that are 
+    # defined in the Dockerfile by command line switches.
+    # Usually it takes Nginx only a few seconds to get ready
+    # so the start_period may be lower than the default 30s
+    # The timeout is the amount of time to complete the
+    # url request by the curl command and verify the response.
+    # Taking into account that the health check request to 
+    # Nginx gets a simple http 200 response with a plain text 
+    # and the request is sent from within the Nginx container 
+    # (by using loopback) then normally Nginx should have no 
+    # problem responding within a few miliseconds therefore 
+    # the timeout around 100 ~ 300 ms is really a long time 
+    # for Nginx to respond if it operates without any problems.
+    # Nginx does not invole PHP-FPM for the health check response.
+    # Check the Nginx service Dockerfile for more information
+    # about the health check.
+    #
+    # healthcheck:
+    #   start_period: 10s
+    #   interval: 20ms
+    #   timeout: 100ms
+    #   retries: 3
+
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#cap_add-cap_drop
+    #
+    # Your service almost never needs all of the capabilities.
+    # Due to security reasons they should be limited
+    # to only these ones that are strictly needed
+    # for the job that the container is intended to do.
+    # Note that firstly all capabilities are dropped so
+    # later only a few of them are added.
+    # by doing that cap_add is esentially a white list
+    # of the capabilities hence not turing one by a mistake
+    # will not decrease the security level but only may
+    # cause the service to not perform its task(s).
+    #
+    cap_drop:
+      - ALL
+
+    # This is a list of all capabilities.
+    # note that the ones requried by the original image
+    # are uncommented but also have an additional comment
+    # this is important so if you start to play with the
+    # list below and turn on/off some of them by commenting
+    # or removing the comment at the beginning you will
+    # be always having the information about these
+    # capabilites that are bare minimum to the container
+    # in its base configuration. If you uncomment (add) any cap.
+    # add to them also a comment about the reason they need
+    # to be added so later you know why the bare minimum
+    # capabilities were not enough for your application
+    # and prehaps turn off (comment) the additional ones
+    # if project requirements change and the container 
+    # will not no longer require them.
+    # For your convinience the list has all of the
+    # capabilities but you may like to have this list
+    # in your project separately as a reference with
+    # more verbose comments and just copy and paste
+    # from that list here, under the cap_add key the
+    # capabilities you want to add.
+    #
+    cap_add:
+      # - CAP_AUDIT_CONTROL
+      # - CAP_AUDIT_READ
+      # - CAP_AUDIT_WRITE
+      # - CAP_BLOCK_SUSPEND
+      - CAP_CHOWN             # required by the original image
+      - CAP_DAC_OVERRIDE      # required by the original image
+      - CAP_DAC_READ_SEARCH   # required by the original image
+      - CAP_FOWNER            # required by the original image
+      # - CAP_FSETID
+      # - CAP_IPC_LOCK
+      # - CAP_IPC_OWNER
+      # - CAP_KILL
+      # - CAP_LEASE
+      # - CAP_LINUX_IMMUTABLE
+      # - CAP_MAC_ADMIN
+      # - CAP_MAC_OVERRIDE
+      # - CAP_MKNOD
+      # - CAP_NET_ADMIN
+      # - CAP_NET_BIND_SERVICE
+      # - CAP_NET_BROADCAST
+      # - CAP_NET_RAW
+      - CAP_SETGID             # required by the original image
+      # - CAP_SETFCAP
+      # - CAP_SETPCAP
+      - CAP_SETUID             # required by the original image
+      # - CAP_SYS_ADMIN
+      # - CAP_SYS_BOOT
+      # - CAP_SYS_CHROOT
+      # - CAP_SYS_MODULE
+      # - CAP_SYS_NICE
+      # - CAP_SYS_PACCT
+      # - CAP_SYS_PTRACE
+      # - CAP_SYS_RAWIO
+      # - CAP_SYS_RESOURCE
+      # - CAP_SYS_TIME
+      # - CAP_SYS_TTY_CONFIG
+      # - CAP_SYSLOG
+      # - CAP_WAKE_ALARM
+
+    volumes:
+      - ${app_path:-./app}:/usr/share/nginx/html:ro
+      - ${service_path:-.}/nginx-v1/${image_files_path}/var/log:/var/log
+      - ${service_path:-.}/nginx-v1/${image_files_path}/etc/nginx/conf.d:/etc/nginx/conf.d:ro

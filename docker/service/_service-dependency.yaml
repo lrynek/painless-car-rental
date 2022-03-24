@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  nginx-v1:
+    depends_on: 
+
+      # Service nginx-v1 will be created
+      # but will be not started unless
+      # php-fpm-v8 is started and
+      # elasticsearch-v7 reports healthy status
+
+      # Available conditions: 
+      # service_started
+      # service_healthy # requies implementation of healthcheck - see Dockerfile of Nginx or Elasticsearch
+      # service_completed_successfully
+
+      php-fpm-v8:
+        condition: service_started
+      
+      elasticsearch-v7:
+        condition: service_healthy

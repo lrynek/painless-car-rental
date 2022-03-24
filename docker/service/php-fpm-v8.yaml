@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  php-fpm-v8:
+    image: ${COMPOSE_PROJECT_NAME}_php:8.1.3-fpm-buster
+    build: 
+      context: ${service_path:-.}/php-fpm-v8/${image_path}
+      args:
+        image: php:8.1.3-fpm-buster
+      shm_size: '2gb'
+      target: dev
+
+    env_file: 
+      - "${service_path:-.}/php-fpm-v8/${image_path}/.env.dev"
+
+    user: ${uid:-1000}:${gid:-1000}
+
+    #TODO - make your capabilities restrictions for that service
+    # take nginx-v1 service as an example and check if you may
+    # limit the capabilities even further.
+    # who knows, maybe you may grant zero capabilities and this
+    # service still will work without any problem?
+
+    # cap_drop:
+    #   - ALL
+
+    # cap_add:
+
+    volumes:
+      - ${app_path:-./app}:/usr/share/nginx/html

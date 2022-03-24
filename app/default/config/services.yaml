@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    app.elasticsearch.host: '%env(DOCKER_ELASTICSEARCH_HOST)%'
 
 services:
     # default configuration for services in *this* file
@@ -35,3 +36,7 @@ services:
         resource: '../src/Twig/Extension/*'
         tags:
             - { name: twig.extension }
+
+    App\Elasticsearch\Service\ApiClient:
+        arguments:
+            $elasticsearchHost: '%app.elasticsearch.host%'

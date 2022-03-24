@@ -1,0 +1,107 @@
+.
+├── [1.0K]  .env
+├── [  28]  .gitignore
+├── [6.4K]  README.md
+├── [ 235]  _limit-memory.yaml
+├── [1.4K]  _network.yaml
+├── [ 902]  _profiles.yaml
+├── [ 280]  _restart-policy.yaml
+├── [ 540]  _service-dependency.yaml
+├── [   0]  dirlist.txt
+├── [ 342]  docker-compose.yaml
+├── [DIR ]  elasticsearch-v7
+│   └── [DIR ]  image
+│       ├── [  70]  .dockerignore
+│       ├── [ 462]  .env.dev
+│       ├── [ 363]  Dockerfile
+│       └── [DIR ]  files
+│           └── [DIR ]  usr
+│               └── [DIR ]  share
+│                   └── [DIR ]  elasticsearch
+│                       └── [DIR ]  config
+│                           ├── [1.0K]  elasticsearch-plugins.example.yml
+│                           ├── [ 199]  elasticsearch.keystore
+│                           ├── [  53]  elasticsearch.yml
+│                           ├── [3.2K]  jvm.options
+│                           ├── [DIR ]  jvm.options.d
+│                           ├── [ 19K]  log4j2.file.properties
+│                           ├── [ 10K]  log4j2.properties
+│                           ├── [ 473]  role_mapping.yml
+│                           ├── [ 197]  roles.yml
+│                           ├── [   0]  users
+│                           └── [   0]  users_roles
+├── [5.1K]  elasticsearch-v7.yaml
+├── [DIR ]  nginx-v1
+│   └── [DIR ]  image
+│       ├── [  19]  .dockerignore
+│       ├── [   0]  .env.dev
+│       ├── [  19]  .gitignore
+│       ├── [ 602]  Dockerfile
+│       └── [DIR ]  files
+│           ├── [DIR ]  etc
+│           │   └── [DIR ]  nginx
+│           │       ├── [DIR ]  conf.d
+│           │       │   └── [ 894]  default.conf
+│           │       ├── [1007]  fastcgi_params
+│           │       ├── [2.8K]  koi-utf
+│           │       ├── [2.2K]  koi-win
+│           │       ├── [5.1K]  mime.types
+│           │       ├── [  22]  modules -> /usr/lib/nginx/modules
+│           │       ├── [1.0K]  nginx.conf
+│           │       ├── [ 636]  scgi_params
+│           │       ├── [ 664]  uwsgi_params
+│           │       └── [3.5K]  win-utf
+│           └── [ 166]  site.conf
+├── [4.4K]  nginx-v1.yaml
+├── [DIR ]  php-composer-v2
+│   ├── [   0]  .env.dev
+│   └── [DIR ]  image
+│       └── [ 684]  Dockerfile
+├── [1.2K]  php-composer-v2.yaml
+├── [DIR ]  php-fpm-v8
+│   └── [DIR ]  image
+│       ├── [  28]  .dockerignore
+│       ├── [  31]  .env.dev
+│       ├── [  28]  Dockerfile
+│       └── [DIR ]  files
+│           └── [DIR ]  usr
+│               └── [DIR ]  local
+│                   └── [DIR ]  etc
+│                       └── [DIR ]  php
+│                           ├── [DIR ]  conf.d
+│                           │   ├── [  20]  docker-php-ext-bcmath.ini
+│                           │   ├── [  22]  docker-php-ext-calendar.ini
+│                           │   ├── [  17]  docker-php-ext-dba.ini
+│                           │   ├── [  18]  docker-php-ext-exif.ini
+│                           │   ├── [  16]  docker-php-ext-gd.ini
+│                           │   ├── [  21]  docker-php-ext-gettext.ini
+│                           │   ├── [  21]  docker-php-ext-imagick.ini
+│                           │   ├── [  21]  docker-php-ext-mongodb.ini
+│                           │   ├── [  20]  docker-php-ext-mysqli.ini
+│                           │   ├── [  82]  docker-php-ext-opcache.ini
+│                           │   ├── [  19]  docker-php-ext-pcntl.ini
+│                           │   ├── [  23]  docker-php-ext-pdo_mysql.ini
+│                           │   ├── [  23]  docker-php-ext-pdo_pgsql.ini
+│                           │   ├── [  19]  docker-php-ext-pgsql.ini
+│                           │   ├── [  20]  docker-php-ext-pspell.ini
+│                           │   ├── [  19]  docker-php-ext-shmop.ini
+│                           │   ├── [  18]  docker-php-ext-soap.ini
+│                           │   ├── [  21]  docker-php-ext-sockets.ini
+│                           │   ├── [  20]  docker-php-ext-sodium.ini
+│                           │   ├── [  17]  docker-php-ext-svm.ini
+│                           │   ├── [  21]  docker-php-ext-sysvmsg.ini
+│                           │   ├── [  21]  docker-php-ext-sysvsem.ini
+│                           │   ├── [  21]  docker-php-ext-sysvshm.ini
+│                           │   ├── [  18]  docker-php-ext-tidy.ini
+│                           │   ├── [  20]  docker-php-ext-trader.ini
+│                           │   ├── [  18]  docker-php-ext-wddx.ini
+│                           │   ├── [  20]  docker-php-ext-xmlrpc.ini
+│                           │   ├── [  17]  docker-php-ext-xsl.ini
+│                           │   ├── [  17]  docker-php-ext-zip.ini
+│                           │   └── [ 103]  php.ini
+│                           ├── [ 69K]  php.ini-development
+│                           └── [ 69K]  php.ini-production
+├── [ 767]  php-fpm-v8.yaml
+└── [2.5K]  setup.sh
+
+24 directories, 81 files

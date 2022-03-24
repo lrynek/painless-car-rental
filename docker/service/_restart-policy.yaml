@@ -1,0 +1,16 @@
+version: "3.7"
+
+# https://docs.docker.com/compose/compose-file/compose-file-v3/#restart
+
+services:
+  nginx-v1:
+    restart: unless-stopped  
+
+  php-fpm-v8:
+    restart: unless-stopped
+
+  elasticsearch-v7:
+    restart: unless-stopped
+
+  php-composer-v2:
+    restart: unless-stopped
