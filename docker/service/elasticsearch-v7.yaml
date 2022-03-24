@@ -107,5 +107,3 @@ services:
     volumes:
       - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/data:/usr/share/elasticsearch/data:rw
       - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/logs/:/usr/share/elasticsearch/logs/:rw
-      - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/config/:/usr/share/elasticsearch/config/:ro
-      - ${service_path:-.}/elasticsearch-v7/${image_files_path}/usr/share/elasticsearch/plugins/:/usr/share/elasticsearch/plugins/:ro
