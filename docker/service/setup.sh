@@ -17,16 +17,13 @@ sudo chmod -v ug+x,o-wx \
 
 # Nginx: create dirs, set owner and group, set access permissions
 mkdir -p \
-./nginx-v1/image/files/var/log/nginx \
-./nginx-v1/image/files/usr/share/nginx/html/default && \
+./nginx-v1/image/files/var/log/nginx && \
 \
 sudo chown -R $uid:$gid \
-./nginx-v1/image/files/var/log/nginx \
-./nginx-v1/image/files/usr/share/nginx/html/default && \
+./nginx-v1/image/files/var/log/nginx && \
 \
 sudo chmod -v -R ug=rwX,o=rX \
-./nginx-v1/image/files/var/log/nginx \
-./nginx-v1/image/files/usr/share/nginx/html/default
+./nginx-v1/image/files/var/log/nginx && \
 
 # Elasticsearch: create dirs, set owner and group, set access permissions
 mkdir -p \
