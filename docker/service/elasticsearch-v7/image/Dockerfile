@@ -1,6 +1,4 @@
 ARG image
-#TODO - shold from image dev be above or below dockerfile code?
-
 FROM $image AS dev
 
 RUN apt-get update && apt-get install -y curl && apt-get clean
