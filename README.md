@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/36886649/145262691-59852b28-141a-4d1a-ac9c-73bd1e5b00bf.png)
 
 ## Purpose and constraints
-This is the simple educational project prepared to support my recent presentation during [**PHPers Summit 2021**](https://2021.summit.phpers.pl/pl/) conference (more recently on [**Warszawskie Dni Informatyki 2022**](https://warszawskiedniinformatyki.pl/en/) and [**4Developers 2022**](https://4developers.org.pl/bio_online_2022/#id=48004)) and to allow participants to play with Elasticsearch scoring. It is not intended to expose any architectural patterns of the code itself, so please don't stick to the directory structure or the overall code architecture too much 😉.
+This is the simple educational project prepared to support my presentation during [**PHPers Summit 2021**](https://2021.summit.phpers.pl/pl/) conference (more recently on [**Warszawskie Dni Informatyki 2022**](https://warszawskiedniinformatyki.pl/en/) and [**4Developers 2022**](https://4developers.org.pl/bio_online_2022/#id=48004)) and to allow participants to play with Elasticsearch scoring. It is not intended to expose any architectural patterns of the code itself, so please don't stick to the directory structure or the overall code architecture too much 😉.
 
 | [Docplanner Tech](https://docplanner.tech) | [PHPers Summit 2021](https://2021.summit.phpers.pl/pl/) | [Warszawskie Dni Informatyki](https://warszawskiedniinformatyki.pl/en/) | [**4Developers**](https://4developers.org.pl/)
 | :---:         |     :---:      |     :---:      |     :---:      |
@@ -1514,12 +1514,12 @@ You may use also: [Step by step other methods](#Step-by-step-other-methods)
 
 All Elasticsearch implementation related code is placed in `src/Elasticsearch` directory.
 
-The core ranking logic is built [from specific `Factors` classes](https://github.com/lrynek/phpers-2021/tree/main/src/Elasticsearch/ValueObject/Factor):
-- [`RawScoreFactor`](https://github.com/lrynek/phpers-2021/blob/main/src/Elasticsearch/ValueObject/Factor/RawScoreFactor.php) that propagates the originally calculated document score to the overall scoring (as it is being overwritten / replaced by all custom functions) in order to weight it along with other custom factors provided by the developer
-- [`DodgePromoFactor`](https://github.com/lrynek/phpers-2021/blob/main/src/Elasticsearch/ValueObject/Factor/DodgePromoFactor.php) that promotes all documents that has `producer` field equal to `Dodge` (you can switch to any other)
-- [`ColorRelevanceFactor`](https://github.com/lrynek/phpers-2021/blob/main/src/Elasticsearch/ValueObject/Factor/ColorRelevanceFactor.php) that ranks higher these documents / cars which has more intensive or exclusive color to the ones that are being filtered out on every app's request
+The core ranking logic is built [from specific `Factors` classes](https://github.com/lrynek/painless-car-rental/tree/main/src/Elasticsearch/ValueObject/Factor):
+- [`RawScoreFactor`](https://github.com/lrynek/painless-car-rental/blob/main/src/Elasticsearch/ValueObject/Factor/RawScoreFactor.php) that propagates the originally calculated document score to the overall scoring (as it is being overwritten / replaced by all custom functions) in order to weight it along with other custom factors provided by the developer
+- [`DodgePromoFactor`](https://github.com/lrynek/painless-car-rental/blob/main/src/Elasticsearch/ValueObject/Factor/DodgePromoFactor.php) that promotes all documents that has `producer` field equal to `Dodge` (you can switch to any other)
+- [`ColorRelevanceFactor`](https://github.com/lrynek/painless-car-rental/blob/main/src/Elasticsearch/ValueObject/Factor/ColorRelevanceFactor.php) that ranks higher these documents / cars which has more intensive or exclusive color to the ones that are being filtered out on every app's request
 
-Then the `RecommendedSorter` that includes all those ranking factors is [set up in `CarRepository`](https://github.com/lrynek/phpers-2021/blob/b4a8431ffd73c7417b00d6428ef491c91b45960f/src/Elasticsearch/Repository/CarRepository.php#L32) to guarantee it applies to every search request:
+Then the `RecommendedSorter` that includes all those ranking factors is [set up in `CarRepository`](https://github.com/lrynek/painless-car-rental/blob/b4a8431ffd73c7417b00d6428ef491c91b45960f/src/Elasticsearch/Repository/CarRepository.php#L32) to guarantee it applies to every search request:
 
 ```php
 <?php
@@ -1563,8 +1563,4 @@ final class RecommendedSorter implements FactorSorterInterface
  [^TOC^](#Table-of-contents)
 
 ## Copyrights
-
-Apart from [the project's LICENSE](https://github.com/lrynek/phpers-2021/blob/main/LICENSE), [all car photo samples](https://github.com/lrynek/phpers-2021/tree/main/public/images/cars) used in the project are taken from Google search results and all copyrights applies to their respective authors and shouldn't be used further than private/educational use without their explicit consent.
-
- [^TOC^](#Table-of-contents)
-
+Apart from [the project's LICENSE](https://github.com/lrynek/painless-car-rental/blob/main/LICENSE), [all car photo samples](https://github.com/lrynek/painless-car-rental/tree/main/public/images/cars) used in the project are taken from Google search results and all copyrights applies to their respective authors and shouldn't be used further than private/educational use without their explicit consent.
