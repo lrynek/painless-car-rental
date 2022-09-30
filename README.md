@@ -10,7 +10,7 @@ This is the simple educational project prepared to support my presentation durin
 | ![image](https://user-images.githubusercontent.com/36886649/135843518-9d4b2ec1-32dc-4226-a63c-b173d9b0706e.png) | ![image](https://user-images.githubusercontent.com/36886649/135534953-338af09d-d2c6-43ee-9407-137253cc4e13.png) | <img width="333" alt="image" src="https://user-images.githubusercontent.com/36886649/159000173-5560813a-2a13-452d-8444-c17d4405140f.png"> | <img width="249" alt="image" src="https://user-images.githubusercontent.com/36886649/159000375-33ef5c35-e39f-4115-a39c-b25674d4655d.png">
 
 ## Requirements
-- PHP 8.1.7
+- PHP 8.1.11
 - Symfony CLI (https://symfony.com/download)
 - Elasticsearch 7.16.0 running on `localhost:9200`
 
