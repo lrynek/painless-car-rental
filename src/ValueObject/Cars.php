@@ -17,18 +17,6 @@ final class Cars implements \IteratorAggregate, \Countable, PagesTotalAwareInter
 		$this->cars = $cars;
 	}
 
-	public static function fromResponse(Response $response): self
-	{
-		$cars = $response->results()->map(static function (Result $result) {
-			return Car::fromResult($result);
-		});
-
-		return new self(
-			$response->total(),
-			...$cars
-		);
-	}
-
 	public function getIterator(): \ArrayIterator
 	{
 		return new \ArrayIterator($this->cars);
